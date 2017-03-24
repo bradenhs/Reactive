@@ -10,6 +10,10 @@
     "postinstall": "./scripts/post_install.sh",
     "start": "node ./fuse/development.js",
     "build:production": "node ./fuse/production.js",
+    "generate-icon": "cp assets/icon.png clients/mobile-app && cd clients/mobile-app && cordova-icon",
+    "generate-splash": "cp assets/splash.png clients/mobile-app && cd clients/mobile-app && cordova-splash",
+    "android": "yarn run build:production && cd clients/mobile-app && cordova run android",
+    "ios": "yarn run build:production && cd clients/mobile-app && cordova run ios --device",
     "cordova": "cd clients/mobile-app && cordova"
   },
   "devDependencies": {
@@ -23,6 +27,8 @@
   "dependencies": {
     "@types/react": "^15.0.20",
     "@types/react-dom": "^0.14.23",
+    "cordova-icon": "^0.9.1",
+    "cordova-splash": "^0.9.0",
     "fnx": "^0.0.18",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",
