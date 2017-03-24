@@ -21,6 +21,9 @@ website version of the app.
 
 **Five** Open the project in VSCode and install the recommended extensions.
 
+*/*Node: VSCode may ask you which version of TypeScript you want to use. Wait until `yarn install`
+is complete and then choose the workspace version.
+
 # Development
 
 With `yarn start` running the app is in live reload mode. Any changes you make to the `src` directory

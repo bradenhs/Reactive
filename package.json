@@ -13,7 +13,7 @@
     "serve:website": "webpack-dev-server --config webpack/src.config.js --inline --content-base clients/website",
     "build:src": "webpack --config webpack/src.config.js",
     "build:dependencies": "webpack --config webpack/dependencies.config.js",
-    "build:production": "./scripts/build_production.js",
+    "build:production": "./scripts/build_production.sh",
     "generate-icon": "cp ./assets/icon.png ./clients/mobile-app/icon.png && cd clients/mobile-app && cordova-icon",
     "generate-splash": "cp ./assets/splash.png ./clients/mobile-app/splash.png && cd clients/mobile-app && cordova-splash",
     "android": "yarn run build:production && cd clients/mobile-app && cordova run android",

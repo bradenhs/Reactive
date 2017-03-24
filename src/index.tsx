@@ -5,6 +5,9 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin'
 import { App } from '~/components'
 import { state } from '~/state'
 
+// Get the roboto font
+import '~/style/fonts'
+
 // Remove 300ms delay for click events
 injectTapEventPlugin()
 
