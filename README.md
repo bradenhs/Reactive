@@ -8,6 +8,8 @@
 
 **Four** Inside of the project directory run these commands:
 
+It may take a few minutes for these to finish running.
+
 ```
 yarn install
 yarn run prepare
