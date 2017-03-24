@@ -10,13 +10,15 @@
     "postinstall": "./scripts/post_install.sh",
     "start": "node ./fuse/development.js",
     "build:production": "node ./fuse/production.js",
-    "generate-icon": "cp assets/icon.png clients/mobile-app && cd clients/mobile-app && cordova-icon",
-    "generate-splash": "cp assets/splash.png clients/mobile-app && cd clients/mobile-app && cordova-splash",
+    "generate-icon": "cp ./assets/icon.png ./clients/mobile-app/icon.png && cd clients/mobile-app && cordova-icon",
+    "generate-splash": "cp ./assets/splash.png ./clients/mobile-app/splash.png && cd clients/mobile-app && cordova-splash",
     "android": "yarn run build:production && cd clients/mobile-app && cordova run android",
     "ios": "yarn run build:production && cd clients/mobile-app && cordova run ios --device",
     "cordova": "cd clients/mobile-app && cordova"
   },
   "devDependencies": {
+    "@types/cordova-plugin-keyboard": "^0.1.3",
+    "@types/cordova-plugin-splashscreen": "^0.0.3",
     "@types/material-ui": "^0.16.59",
     "@types/react-tap-event-plugin": "^0.0.30",
     "cordova": "^6.5.0",
@@ -25,6 +27,7 @@
     "typescript": "^2.2.1"
   },
   "dependencies": {
+    "@types/cordova": "^0.0.34",
     "@types/react": "^15.0.20",
     "@types/react-dom": "^0.14.23",
     "cordova-icon": "^0.9.1",

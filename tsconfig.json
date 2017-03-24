@@ -11,8 +11,5 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noEmitOnError": true
-  },
-  "exclude": [
-    "clients", "node_modules"
-  ]
+  }
 }

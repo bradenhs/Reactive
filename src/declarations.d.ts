@@ -1,5 +1,6 @@
 import * as R from 'react'
 
 declare global {
-  const React: typeof R;
+  const ENVIRONMENT: 'website' | 'mobile-app'
+  const React: typeof R
 }
