@@ -1,15 +1,12 @@
-import { action, boolean, createObservable } from 'fnx'
+import { action, boolean, object } from 'fnx'
+import { Menu } from '~/state'
 
-class State {
+export class State {
   deviceReady = boolean
+
+  menu = object(Menu)
 
   setAsReady? = action((root: State) => () => {
     root.deviceReady = true
   })
 }
-
-const initialState: State = {
-  deviceReady: false,
-}
-
-export const state = createObservable(State, initialState)

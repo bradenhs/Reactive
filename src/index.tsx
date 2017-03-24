@@ -6,7 +6,9 @@ import { App } from '~/components'
 import { state } from '~/state'
 
 // Get the roboto font
-import '~/style/fonts'
+import { addFonts } from '~/styles'
+
+addFonts()
 
 // Remove 300ms delay for click events
 injectTapEventPlugin()
