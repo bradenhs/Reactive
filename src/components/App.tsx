@@ -1,5 +1,6 @@
 import ReactiveComponent from 'fnx/react'
+import * as React from 'react'
 
 export const App = ReactiveComponent(() =>
-  <div>Reactive</div>
+  <div>Reactive There</div>
 )

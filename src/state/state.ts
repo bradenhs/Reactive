@@ -1,10 +1,10 @@
-import { createObservable, boolean, action } from 'fnx'
+import { action, boolean, createObservable } from 'fnx'
 
 class State {
   deviceReady = boolean
 
-  setAsReady? = action((s: State) => () => {
-    s.deviceReady = true
+  setAsReady? = action((root: State) => () => {
+    root.deviceReady = true
   })
 }
 

@@ -1,8 +1,9 @@
+import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as injectTapEventPlugin from 'react-tap-event-plugin'
 
-import { state } from '~/state'
 import { App } from '~/components'
+import { state } from '~/state'
 
 // Remove 300ms delay for click events
 injectTapEventPlugin()
