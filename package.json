@@ -1,0 +1,33 @@
+{
+  "name": "reactive",
+  "version": "0.0.1",
+  "description": "The real-time budgeting app",
+  "main": "index.js",
+  "repository": "git@github.com:bradenhs/Reactive.git",
+  "author": "Braden Snell <bhsnll@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "./scripts/post_install.sh",
+    "start": "node ./fuse/development.js",
+    "build:production": "node ./fuse/production.js",
+    "cordova": "cd clients/mobile-app && cordova"
+  },
+  "devDependencies": {
+    "@types/material-ui": "^0.16.59",
+    "@types/react-tap-event-plugin": "^0.0.30",
+    "cordova": "^6.5.0",
+    "express": "^4.15.2",
+    "fuse-box": "^1.3.128",
+    "typescript": "^2.2.1"
+  },
+  "dependencies": {
+    "@types/react": "^15.0.20",
+    "@types/react-dom": "^0.14.23",
+    "fnx": "^0.0.18",
+    "material-ui": "^0.17.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-tap-event-plugin": "^2.0.1",
+    "typestyle": "^1.2.1"
+  }
+}
