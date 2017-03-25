@@ -17,19 +17,12 @@ ReactDOM.render(<App/>, document.querySelector('#app'))
 
 if (ENVIRONMENT === 'website') {
   // Added to allow client specific styling
-  document.body.classList.add('website')
   state.setAsReady()
 }
 
 if (ENVIRONMENT === 'mobile-app') {
-  document.body.classList.add('mobile-app')
-
   // Special cordova event fired when in app
   document.addEventListener('deviceready', () => {
-
-    // Added to allow client specific styling
-    document.body.classList.add('platform-' + device.platform)
-
     if (device.platform === 'iOS') {
       Keyboard.shrinkView(true)
       Keyboard.hideFormAccessoryBar(true)

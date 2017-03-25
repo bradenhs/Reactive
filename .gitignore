@@ -8,3 +8,9 @@ webpack/generated
 build
 .DS_Store
 config/firebase.config.ts
+clients/mobile-app/www/build/*
+clients/mobile-app/plugins
+clients/mobile-app/platforms
+clients/website/build/*
+clients/mobile-app/www/assets/*
+clients/website/assets/*
