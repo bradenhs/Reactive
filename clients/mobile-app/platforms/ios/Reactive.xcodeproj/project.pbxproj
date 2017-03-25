@@ -13,10 +13,10 @@
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
-		D19A0E8B0FB84F77827E65BC /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = BDFED33F380748F5A78C2428 /* CDVDevice.m */; };
-		B5A5322942C945FB9E063D5E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C17219492714565B5748C32 /* libz.tbd */; };
-		DEF64E9822C441F18CD381E3 /* CDVKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 642ADE47448D4DD19A073574 /* CDVKeyboard.m */; };
-		B1AB17B96C2B4597B4B25DD1 /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = DE67913918D74F3D83DC4DA5 /* CDVStatusBar.m */; };
+		DA449F4A2BFA4F8CA0382726 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FA53CA64DE4899A1403AB6 /* CDVDevice.m */; };
+		BEB5E7EEE3834C808F56DAC8 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E68CFAFE056C43EE890EA4B8 /* libz.tbd */; };
+		AE984D000A0F489895EB0AD5 /* CDVKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F49B560FBEA4CEC86F2B00C /* CDVKeyboard.m */; };
+		B7F36F961AAF4438BC3D4E84 /* CDVStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C2CBE1C04D49AAA277578D /* CDVStatusBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,13 +57,13 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = Reactive/config.xml; sourceTree = "<group>"; };
-		BDFED33F380748F5A78C2428 /* CDVDevice.m */ = {isa = PBXFileReference; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		D544A625018A49ECAE8A77EA /* CDVDevice.h */ = {isa = PBXFileReference; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		6C17219492714565B5748C32 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
-		642ADE47448D4DD19A073574 /* CDVKeyboard.m */ = {isa = PBXFileReference; name = "CDVKeyboard.m"; path = "cordova-plugin-keyboard/CDVKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		91FD3C0CC1304837A67D62BD /* CDVKeyboard.h */ = {isa = PBXFileReference; name = "CDVKeyboard.h"; path = "cordova-plugin-keyboard/CDVKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		DE67913918D74F3D83DC4DA5 /* CDVStatusBar.m */ = {isa = PBXFileReference; name = "CDVStatusBar.m"; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		BF34B607FB5244CCA045475B /* CDVStatusBar.h */ = {isa = PBXFileReference; name = "CDVStatusBar.h"; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		27FA53CA64DE4899A1403AB6 /* CDVDevice.m */ = {isa = PBXFileReference; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		DD77532BECF7443B80F3C648 /* CDVDevice.h */ = {isa = PBXFileReference; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		E68CFAFE056C43EE890EA4B8 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		5F49B560FBEA4CEC86F2B00C /* CDVKeyboard.m */ = {isa = PBXFileReference; name = "CDVKeyboard.m"; path = "cordova-plugin-keyboard/CDVKeyboard.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		939AF3BD7D2E45BE9FA8CB4A /* CDVKeyboard.h */ = {isa = PBXFileReference; name = "CDVKeyboard.h"; path = "cordova-plugin-keyboard/CDVKeyboard.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		73C2CBE1C04D49AAA277578D /* CDVStatusBar.m */ = {isa = PBXFileReference; name = "CDVStatusBar.m"; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		F87A9802F80E4602985D4E08 /* CDVStatusBar.h */ = {isa = PBXFileReference; name = "CDVStatusBar.h"; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
-				B5A5322942C945FB9E063D5E /* libz.tbd in Frameworks */,
+				BEB5E7EEE3834C808F56DAC8 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +143,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6C17219492714565B5748C32 /* libz.tbd */,
+				E68CFAFE056C43EE890EA4B8 /* libz.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,12 +169,12 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				BDFED33F380748F5A78C2428 /* CDVDevice.m */,
-				D544A625018A49ECAE8A77EA /* CDVDevice.h */,
-				642ADE47448D4DD19A073574 /* CDVKeyboard.m */,
-				91FD3C0CC1304837A67D62BD /* CDVKeyboard.h */,
-				DE67913918D74F3D83DC4DA5 /* CDVStatusBar.m */,
-				BF34B607FB5244CCA045475B /* CDVStatusBar.h */,
+				27FA53CA64DE4899A1403AB6 /* CDVDevice.m */,
+				DD77532BECF7443B80F3C648 /* CDVDevice.h */,
+				5F49B560FBEA4CEC86F2B00C /* CDVKeyboard.m */,
+				939AF3BD7D2E45BE9FA8CB4A /* CDVKeyboard.h */,
+				73C2CBE1C04D49AAA277578D /* CDVStatusBar.m */,
+				F87A9802F80E4602985D4E08 /* CDVStatusBar.h */,
 			);
 			name = Plugins;
 			path = Reactive/Plugins;
@@ -295,9 +295,9 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				D19A0E8B0FB84F77827E65BC /* CDVDevice.m in Sources */,
-				DEF64E9822C441F18CD381E3 /* CDVKeyboard.m in Sources */,
-				B1AB17B96C2B4597B4B25DD1 /* CDVStatusBar.m in Sources */,
+				DA449F4A2BFA4F8CA0382726 /* CDVDevice.m in Sources */,
+				AE984D000A0F489895EB0AD5 /* CDVKeyboard.m in Sources */,
+				B7F36F961AAF4438BC3D4E84 /* CDVStatusBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
