@@ -86,7 +86,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		Fpxv4CpHAbQAHGHGk+knSU90hNw=
+		YHd8WmC9yoIOPePQkN/FN/K+ZXU=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		CgBojmhr9Q1SRxpNGrXkF1chevU=
+		vyPfcsFJiTeTpWo40hFEBCTfi0U=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -158,7 +158,7 @@
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		EUAI7xmTBz/Vrd8WvNggreEn5yU=
+		dbDWywoT55L4P9Agfe5HoFsgC8I=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -170,7 +170,7 @@
 		</data>
 		<key>config.xml</key>
 		<data>
-		YKXPkTV0OIUUwmx9JYPp2iw9rB8=
+		i6n9QO2tkpENrh0EEU39354b9to=
 		</data>
 		<key>embedded.mobileprovision</key>
 		<data>
@@ -294,7 +294,7 @@
 		</data>
 		<key>www/build/src.bundle.js</key>
 		<data>
-		yExTH0ZXulluMq0+WBps72NR5Z8=
+		kSllDrOy4VEX01GcgaviqNYFG6k=
 		</data>
 		<key>www/cordova-js-src/exec.js</key>
 		<data>
@@ -555,11 +555,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Fpxv4CpHAbQAHGHGk+knSU90hNw=
+			YHd8WmC9yoIOPePQkN/FN/K+ZXU=
 			</data>
 			<key>hash2</key>
 			<data>
-			UD2acDt1CU/wqUaZLwBB5fSFx5YQUEHIifq/PqCz3jo=
+			T9g4EqJKp5Gv4cFWy0mEC68e/kaQKslfv51QzYhiMLo=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
@@ -577,11 +577,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			CgBojmhr9Q1SRxpNGrXkF1chevU=
+			vyPfcsFJiTeTpWo40hFEBCTfi0U=
 			</data>
 			<key>hash2</key>
 			<data>
-			uvresbmipWjsblkWNJ+8CpBJmT9N8fC/rGbQMEMm1ME=
+			QuSvpiA6LA1PojkUtFy0dCJmt8MpfIZCoi3oijPwANQ=
 			</data>
 		</dict>
 		<key>LaunchImage-568h@2x.png</key>
@@ -742,11 +742,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			EUAI7xmTBz/Vrd8WvNggreEn5yU=
+			dbDWywoT55L4P9Agfe5HoFsgC8I=
 			</data>
 			<key>hash2</key>
 			<data>
-			mS8j4v9SjDK0UKY3GSnl102uyX/yorQhcmn65AvfIo4=
+			cUZAjBsOqvF6/wO/Kyd7oYYQNbCF8CXHvvfNj5E7g6Y=
 			</data>
 		</dict>
 		<key>archived-expanded-entitlements.xcent</key>
@@ -764,11 +764,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			YKXPkTV0OIUUwmx9JYPp2iw9rB8=
+			i6n9QO2tkpENrh0EEU39354b9to=
 			</data>
 			<key>hash2</key>
 			<data>
-			cVNrNqP+Y3sYK5nPAvrmDlkFthC2IOsSm9YC4Uze51w=
+			8j64vUE8nKF2N4DtNkRHJIReMCHF187DErq6prgb1xo=
 			</data>
 		</dict>
 		<key>embedded.mobileprovision</key>
@@ -1105,11 +1105,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			yExTH0ZXulluMq0+WBps72NR5Z8=
+			kSllDrOy4VEX01GcgaviqNYFG6k=
 			</data>
 			<key>hash2</key>
 			<data>
-			Qk78zR6GI95pspiQM0rNpyfNpS6ksD3/mna6SOs3R6I=
+			TtS+4JNYQ/t6UuA2rUsC5mXu78XyAeX5VAnvSy1X+aw=
 			</data>
 		</dict>
 		<key>www/cordova-js-src/exec.js</key>
