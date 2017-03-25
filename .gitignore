@@ -7,6 +7,7 @@ node_modules
 webpack/generated
 build
 .DS_Store
+config/firebase.config.ts
 clients/mobile-app/www/build/*
 clients/mobile-app/plugins
 clients/mobile-app/platforms
