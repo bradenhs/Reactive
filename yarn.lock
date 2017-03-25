@@ -1526,9 +1526,9 @@ findup-sync@~0.3.0:
   dependencies:
     glob "~5.0.0"
 
-fnx@^0.0.18:
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/fnx/-/fnx-0.0.18.tgz#1494e36d8ca972a77c91aedac593fab102a93d55"
+fnx@^0.0.20:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/fnx/-/fnx-0.0.20.tgz#1c5d266cfcdbe85346001c91c588bcf7c8ce7f37"
 
 for-in@^1.0.1:
   version "1.0.2"

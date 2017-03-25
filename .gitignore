@@ -4,7 +4,6 @@ logs
 npm-debug.log*
 node_modules
 .npm
-clients/mobile-app/platforms
-clients/mobile-app/plugins
 webpack/generated
 build
+.DS_Store
