@@ -1,5 +1,5 @@
 import { createObservable } from 'fnx'
-import { State } from '~/state'
+import { State } from '~/store'
 
 const initialState: State = {
   deviceReady: false,
