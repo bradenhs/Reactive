@@ -18,9 +18,10 @@ export class AppState {
 
   mode: Mode = number
 
-  @optional activeEnvelope? = string
+  activeEnvelope? = computed((appState: AppState) => appState.envelopes[appState.activeEnvelopeId])
+  @optional activeEnvelopeId? = string
 
-  hideFab? = computed((appState: AppState) => appState.activeEnvelope != undefined)
+  hideFab? = computed((appState: AppState) => appState.activeEnvelopeId != undefined)
 
   theme? = computed((appState: AppState) => getTheme(appState.mode))
 
@@ -35,12 +36,12 @@ export class AppState {
     const envelope: Envelope = {
       id: uuid.v4(),
       created: new Date(),
-      view: EnvelopeView.EDIT,
+      view: EnvelopeView.NAMING,
       name: '',
       transactionIds: [ ]
     }
 
-    appState.activeEnvelope = envelope.id
+    appState.activeEnvelopeId = envelope.id
 
     appState.envelopes[envelope.id] = envelope
   })

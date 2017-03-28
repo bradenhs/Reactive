@@ -1,5 +1,4 @@
 export * from './Menu'
 export * from './App'
-export * from './EnvelopeList'
-export * from './Envelope'
+export * from './envelope'
 export * from './MenuItem'

@@ -1,8 +1,9 @@
-import { arrayOf, complex, computed, number, readonly, string } from 'fnx'
-import { AppState, TransactionType } from '~/model'
+import { action, arrayOf, complex, computed, number, optional, readonly, string } from 'fnx'
+import * as uuid from 'uuid'
+import { AppState, Transaction, TransactionType } from '~/model'
 
 export const enum EnvelopeView {
-  EDIT, TRANSACTION
+  NAMING, TRANSACTION
 }
 
 export class Envelope {
@@ -11,7 +12,34 @@ export class Envelope {
 
   view: EnvelopeView = number
 
+  @optional newTransactionAmount? = string
+
   name = string
+  @optional proposedName? = string
+
+  isTransacting? = computed((envelope: Envelope, root: AppState) => {
+    return root.activeEnvelopeId === envelope.id && envelope.view === EnvelopeView.TRANSACTION
+  })
+
+  isNaming? = computed((envelope: Envelope, root: AppState) => {
+    return root.activeEnvelopeId === envelope.id && envelope.view === EnvelopeView.NAMING
+  })
+
+  isInactive? = computed((envelope: Envelope, root: AppState) => {
+    return root.activeEnvelopeId != undefined && root.activeEnvelopeId !== envelope.id
+  })
+
+  yPosition? = computed((envelope: Envelope, root: AppState) => {
+    let yPosition = root.sortedEnvelopes.indexOf(envelope) * 72
+
+    if (root.activeEnvelopeId != undefined &&
+        root.sortedEnvelopes.indexOf(root.activeEnvelope) <
+        root.sortedEnvelopes.indexOf(envelope)) {
+      yPosition += 92
+    }
+
+    return yPosition
+  })
 
   lastPaydayAmount? = computed((envelope: Envelope) => {
     const mostRecentPaydayTransaction = envelope.transactions
@@ -41,4 +69,72 @@ export class Envelope {
   })
 
   transactionIds = arrayOf(string)
+
+  setProposedName? = action((envelope: Envelope) => (proposedName: string) => {
+    envelope.proposedName = proposedName
+  })
+
+  setNewTransactionAmount? = action((envelope: Envelope) => (amount: string) => {
+    envelope.newTransactionAmount = amount
+  })
+
+  commitProposedNamed? = action((envelope: Envelope, root: AppState) => () => {
+    root.activeEnvelopeId = undefined
+    envelope.name = envelope.proposedName
+    envelope.view = EnvelopeView.TRANSACTION
+  })
+
+  remove? = action((envelope: Envelope, root: AppState) => () => {
+    // TODO fix this with fnx
+    delete root.envelopes[envelope.id]
+  })
+
+  startRename? = action((envelope: Envelope, root: AppState) => () => {
+    root.activeEnvelopeId = envelope.id
+    envelope.view = EnvelopeView.NAMING
+  })
+
+  startTransacting? = action((envelope: Envelope, root: AppState) => () => {
+    envelope.view = EnvelopeView.TRANSACTION
+    root.activeEnvelopeId = envelope.id
+  })
+
+  addAmount? = action((envelope: Envelope, root: AppState) => () => {
+    const transaction: Transaction = {
+      id: uuid.v4(),
+      created: new Date(),
+      amount: parseFloat(envelope.newTransactionAmount),
+      destinationId: envelope.id,
+      sourceId: 'MANUAL'
+    }
+    envelope.transactionIds.push(transaction.id)
+    root.transactions[transaction.id] = transaction
+    root.activeEnvelopeId = undefined
+  })
+
+  transferAmount? = action((envelope: Envelope, root: AppState) => () => {
+    const transaction: Transaction = {
+      id: uuid.v4(),
+      created: new Date(),
+      amount: -parseFloat(envelope.newTransactionAmount),
+      destinationId: envelope.id,
+      sourceId: 'MANUAL'
+    }
+    root.transactions[transaction.id] = transaction
+    envelope.transactionIds.push(transaction.id)
+    root.activeEnvelopeId = undefined
+  })
+
+  minusAmount? = action((envelope: Envelope, root: AppState) => () => {
+    const transaction: Transaction = {
+      id: uuid.v4(),
+      created: new Date(),
+      amount: -parseFloat(envelope.newTransactionAmount),
+      destinationId: envelope.id,
+      sourceId: 'MANUAL'
+    }
+    root.transactions[transaction.id] = transaction
+    envelope.transactionIds.push(transaction.id)
+    root.activeEnvelopeId = undefined
+  })
 }

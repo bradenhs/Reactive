@@ -10,6 +10,7 @@ const fab = style({
   right: '20px',
   bottom: '20px',
   transformOrigin: '28px 28px',
+  zIndex: 101,
   transition
 })
 
