@@ -1,44 +1,27 @@
-import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import * as injectTapEventPlugin from 'react-tap-event-plugin'
+import * as styles from '~/styles'
+import * as View from '~/view'
 
-import { App } from '~/components'
-import { state } from '~/state'
-
-// Get the roboto font
-import { addFonts } from '~/styles'
-
-addFonts()
+styles.addBaseStyles()
+styles.addFonts()
 
 // Remove 300ms delay for click events
 injectTapEventPlugin()
 
-ReactDOM.render(<App/>, document.querySelector('#app'))
-
-if (ENVIRONMENT === 'website') {
-  // Added to allow client specific styling
-  state.setAsReady()
-}
+ReactDOM.render(<View.App/>, document.querySelector('#app'))
 
 if (ENVIRONMENT === 'mobile-app') {
-  // Special cordova event fired when in app
   document.addEventListener('deviceready', () => {
     if (device.platform === 'iOS') {
       Keyboard.shrinkView(true)
       Keyboard.hideFormAccessoryBar(true)
     }
 
-    // Handle back button (only for android)
-    document.addEventListener('backbutton', () => {
-      // Override backbutton behavior here
-    }, false)
-
     navigator.splashscreen.hide()
 
     // Initialize status bar
     StatusBar.styleBlackOpaque()
     StatusBar.show()
-
-    state.setAsReady()
   }, false)
 }
