@@ -2,10 +2,10 @@
 <widget id="com.bradenhs.reactive" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Reactive</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        The real-time budgeting app
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="bhsnll@gmail.com" href="http://bradenhs.com">
+        Drew and Braden
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
@@ -22,6 +22,8 @@
     <preference name="Suppresses3DTouchGesture" value="true" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <platform name="android">
+        <preference name="AndroidLaunchMode" value="singleTop"/>
+        <preference name="android-minSdkVersion" value="22" />
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
