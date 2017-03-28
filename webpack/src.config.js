@@ -30,10 +30,19 @@ module.exports = {
         exclude: /(node_modules)/,
       },
       {
+        test: /\.tsx?$/, use: 'auto-import-loader',
+        exclude: /(node_modules)/
+      },
+      {
         test: /\.tsx?$/, use: 'awesome-typescript-loader',
         exclude: /(node_modules)/,
       },
     ],
+  },
+  resolveLoader: {
+    alias: {
+      'auto-import-loader': path.join(__dirname, './autoImport'),
+    },
   },
   plugins: [
     new webpack.DllReferencePlugin({
