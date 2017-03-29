@@ -42,7 +42,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
-    "fnx": "^0.0.23",
+    "fnx": "^0.0.24",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",

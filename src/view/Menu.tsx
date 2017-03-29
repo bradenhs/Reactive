@@ -1,9 +1,5 @@
 import { style } from 'typestyle'
-import { app } from '~/app'
-import {
-  AnalyzeIcon, CodeIcon, CollaborateIcon, EnvelopeIcon, FeedbackIcon, HistoryIcon,
-} from '~/constants'
-import * as View from '~/view'
+import { app, icons, view } from '~/index'
 
 const img = style({
   width: '64px',
@@ -21,34 +17,34 @@ export const Menu = ReactiveComponent(() =>
     >
       <img className={ img } src='assets/icon.png'/>
     </header>
-    <View.MenuItem
-      icon={ <EnvelopeIcon/> }
+    <view.MenuItem
+      icon={ <icons.EnvelopeIcon/> }
       text='Envelopes'
       onTouchTap={ app.menu.close }
     />
-    <View.MenuItem
-      icon={ <HistoryIcon/> }
+    <view.MenuItem
+      icon={ <icons.HistoryIcon/> }
       text='History'
       onTouchTap={ app.menu.close }
     />
-    <View.MenuItem
-      icon={ <AnalyzeIcon/> }
+    <view.MenuItem
+      icon={ <icons.AnalyzeIcon/> }
       text='Analyze'
       onTouchTap={ app.menu.close }
     />
-    <View.MenuItem
-      icon={ <CollaborateIcon/> }
+    <view.MenuItem
+      icon={ <icons.CollaborateIcon/> }
       text='Collaborate'
       onTouchTap={ app.menu.close }
     />
     <MUI.Divider/>
-    <View.MenuItem
-      icon={ <FeedbackIcon/> }
+    <view.MenuItem
+      icon={ <icons.FeedbackIcon/> }
       text='Feedback'
       onTouchTap={ app.menu.close }
     />
-    <View.MenuItem
-      icon={ <CodeIcon/> }
+    <view.MenuItem
+      icon={ <icons.CodeIcon/> }
       text='Source Code'
       onTouchTap={ app.menu.close }
     />

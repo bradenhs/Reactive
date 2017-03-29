@@ -1,9 +1,6 @@
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import ContentAdd from 'material-ui/svg-icons/content/add'
 import { classes, style } from 'typestyle'
-import { app } from '~/app'
-import { transition } from '~/styles'
-import * as View from '~/view'
+import { app, icons, styles, view } from '~/index'
 
 const fab = style({
   position: 'absolute',
@@ -11,7 +8,7 @@ const fab = style({
   bottom: '20px',
   transformOrigin: '28px 28px',
   zIndex: 101,
-  transition
+  transition: styles.transition
 })
 
 const hideFab = style({
@@ -26,14 +23,22 @@ export const App = ReactiveComponent(() =>
         title='Envelopes'
         onLeftIconButtonTouchTap={ app.menu.toggle }
       />
-      <View.Menu/>
-      <View.EnvelopeList/>
+      <view.Menu/>
+      <view.Animated
+        willEnter={ { opacity: 0, transform: 'translateY(50px)' } }
+        didEnter={ { opacity: 1, transform: 'translateY(0px)' } }
+        didLeave={ { opacity: 0, transform: 'translateY(-50px)' } }
+      >
+        { app.sortedEnvelopes.length > 0 ?
+          <view.EnvelopeList key='list'/> :
+          <view.EmptyList key='empty-list'/> }
+      </view.Animated>
       <MUI.FloatingActionButton
         onTouchTap={ app.createEnvelope }
         className={ getFABClassName() }
         secondary
       >
-        <ContentAdd/>
+        <icons.AddIcon/>
       </MUI.FloatingActionButton>
     </div>
   </MuiThemeProvider>

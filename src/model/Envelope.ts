@@ -1,6 +1,6 @@
 import { action, arrayOf, complex, computed, number, optional, readonly, string } from 'fnx'
 import * as uuid from 'uuid'
-import { AppState, Transaction, TransactionType } from '~/model'
+import { model } from '~/index'
 
 export const enum EnvelopeView {
   NAMING, TRANSACTION
@@ -17,19 +17,19 @@ export class Envelope {
   name = string
   @optional proposedName? = string
 
-  isTransacting? = computed((envelope: Envelope, root: AppState) => {
+  isTransacting? = computed((envelope: Envelope, root: model.AppState) => {
     return root.activeEnvelopeId === envelope.id && envelope.view === EnvelopeView.TRANSACTION
   })
 
-  isNaming? = computed((envelope: Envelope, root: AppState) => {
+  isNaming? = computed((envelope: Envelope, root: model.AppState) => {
     return root.activeEnvelopeId === envelope.id && envelope.view === EnvelopeView.NAMING
   })
 
-  isInactive? = computed((envelope: Envelope, root: AppState) => {
+  isInactive? = computed((envelope: Envelope, root: model.AppState) => {
     return root.activeEnvelopeId != undefined && root.activeEnvelopeId !== envelope.id
   })
 
-  yPosition? = computed((envelope: Envelope, root: AppState) => {
+  yPosition? = computed((envelope: Envelope, root: model.AppState) => {
     let yPosition = root.sortedEnvelopes.indexOf(envelope) * 72
 
     if (root.activeEnvelopeId != undefined &&
@@ -43,7 +43,7 @@ export class Envelope {
 
   lastPaydayAmount? = computed((envelope: Envelope) => {
     const mostRecentPaydayTransaction = envelope.transactions
-      .filter(transaction => transaction.type === TransactionType.PAYDAY)
+      .filter(transaction => transaction.type === model.TransactionType.PAYDAY)
       .sort((a, b) => a.amount > b.amount ? 1 : -1)[0]
 
     if (mostRecentPaydayTransaction != undefined) {
@@ -62,7 +62,7 @@ export class Envelope {
       .reduce((total, current) => total + current, 0)
   })
 
-  transactions? = computed((envelope: Envelope, root: AppState) => {
+  transactions? = computed((envelope: Envelope, root: model.AppState) => {
     return Object.keys(root.transactions)
       .filter(id => envelope.transactionIds.indexOf(id) > -1)
       .map(id => root.transactions[id])
@@ -78,29 +78,29 @@ export class Envelope {
     envelope.newTransactionAmount = amount
   })
 
-  commitProposedNamed? = action((envelope: Envelope, root: AppState) => () => {
+  commitProposedNamed? = action((envelope: Envelope, root: model.AppState) => () => {
     root.activeEnvelopeId = undefined
     envelope.name = envelope.proposedName
     envelope.view = EnvelopeView.TRANSACTION
   })
 
-  remove? = action((envelope: Envelope, root: AppState) => () => {
-    // TODO fix this with fnx
+  remove? = action((envelope: Envelope, root: model.AppState) => () => {
+    root.activeEnvelopeId = undefined
     delete root.envelopes[envelope.id]
   })
 
-  startRename? = action((envelope: Envelope, root: AppState) => () => {
+  startRename? = action((envelope: Envelope, root: model.AppState) => () => {
     root.activeEnvelopeId = envelope.id
     envelope.view = EnvelopeView.NAMING
   })
 
-  startTransacting? = action((envelope: Envelope, root: AppState) => () => {
+  startTransacting? = action((envelope: Envelope, root: model.AppState) => () => {
     envelope.view = EnvelopeView.TRANSACTION
     root.activeEnvelopeId = envelope.id
   })
 
-  addAmount? = action((envelope: Envelope, root: AppState) => () => {
-    const transaction: Transaction = {
+  addAmount? = action((envelope: Envelope, root: model.AppState) => () => {
+    const transaction: model.Transaction = {
       id: uuid.v4(),
       created: new Date(),
       amount: parseFloat(envelope.newTransactionAmount),
@@ -112,8 +112,8 @@ export class Envelope {
     root.activeEnvelopeId = undefined
   })
 
-  transferAmount? = action((envelope: Envelope, root: AppState) => () => {
-    const transaction: Transaction = {
+  transferAmount? = action((envelope: Envelope, root: model.AppState) => () => {
+    const transaction: model.Transaction = {
       id: uuid.v4(),
       created: new Date(),
       amount: -parseFloat(envelope.newTransactionAmount),
@@ -125,8 +125,8 @@ export class Envelope {
     root.activeEnvelopeId = undefined
   })
 
-  minusAmount? = action((envelope: Envelope, root: AppState) => () => {
-    const transaction: Transaction = {
+  minusAmount? = action((envelope: Envelope, root: model.AppState) => () => {
+    const transaction: model.Transaction = {
       id: uuid.v4(),
       created: new Date(),
       amount: -parseFloat(envelope.newTransactionAmount),

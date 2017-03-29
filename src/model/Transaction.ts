@@ -1,5 +1,5 @@
 import { complex, computed, number, optional, readonly, string } from 'fnx'
-import { AppState } from '~/model'
+import { model } from '~/index'
 
 export const enum TransactionType {
   PAYDAY, TRANSFER, MANUAL
@@ -23,11 +23,11 @@ export class Transaction {
     }
   })
 
-  destination? = computed((transaction: Transaction, root: AppState) => {
+  destination? = computed((transaction: Transaction, root: model.AppState) => {
     return root.envelopes[transaction.destinationId]
   })
 
-  source? = computed((transaction: Transaction, root: AppState) => {
+  source? = computed((transaction: Transaction, root: model.AppState) => {
     return root.envelopes[transaction.sourceId]
   })
 

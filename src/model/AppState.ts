@@ -2,7 +2,7 @@ import { action, computed, mapOf, number, object, optional, string } from 'fnx'
 import * as colors from 'material-ui/styles/colors'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import * as uuid from 'uuid'
-import { Envelope, EnvelopeView, Menu, Transaction } from '~/model'
+import { model } from '~/index'
 
 export const enum EnvelopeSort {
   MOST_RECENT_TRANSACTION, AMOUNT_LEFT_ASCENDING, AMOUNT_LEFT_DESCENDING,
@@ -14,12 +14,14 @@ export const enum Mode {
 }
 
 export class AppState {
-  menu = object(Menu)
+  menu = object(model.Menu)
 
   mode: Mode = number
 
   activeEnvelope? = computed((appState: AppState) => appState.envelopes[appState.activeEnvelopeId])
-  @optional activeEnvelopeId? = string
+
+  @optional
+  activeEnvelopeId? = string
 
   hideFab? = computed((appState: AppState) => appState.activeEnvelopeId != undefined)
 
@@ -29,14 +31,14 @@ export class AppState {
 
   envelopeSort: EnvelopeSort = number
 
-  envelopes = mapOf(object(Envelope))
-  transactions = mapOf(object(Transaction))
+  envelopes = mapOf(object(model.Envelope))
+  transactions = mapOf(object(model.Transaction))
 
   createEnvelope? = action((appState: AppState) => () => {
-    const envelope: Envelope = {
+    const envelope: model.Envelope = {
       id: uuid.v4(),
       created: new Date(),
-      view: EnvelopeView.NAMING,
+      view: model.EnvelopeView.NAMING,
       name: '',
       transactionIds: [ ]
     }

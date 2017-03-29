@@ -5,7 +5,7 @@ var TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlug
 var PRODUCTION = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: './src/index.ts',
   devtool: PRODUCTION ? false : 'source-map',
   performance: {
     hints: PRODUCTION ? 'warning' : false,
