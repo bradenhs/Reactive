@@ -17,6 +17,7 @@ export const EditName = ReactiveComponent(({ envelope }: IProps) => {
         value={ envelope.nameInputValue || '' }
         fullWidth
         hintText='Envelope Name'
+        hintStyle={ { fontWeight: 400 } }
         ref={ c => textField = c }
         onChange={ (e: any) => envelope.setNameInputValue(e.target.value) }
       />

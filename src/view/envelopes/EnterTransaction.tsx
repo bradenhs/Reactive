@@ -27,6 +27,7 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
           type='tel'
           ref={ c => numberField = c}
           hintText='Amount'
+          hintStyle={ { fontWeight: 400 } }
           onKeyPress={ onKeyPress }
           onChange={ (e: any) => {
             e.preventDefault()

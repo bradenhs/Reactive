@@ -6,7 +6,7 @@ import { model } from '~/index'
 
 export const enum EnvelopeSort {
   MOST_RECENT_TRANSACTION, AMOUNT_LEFT_ASCENDING, AMOUNT_LEFT_DESCENDING,
-  ALPHABETICAL, REVERSE_ALPHABETICAL
+  ALPHABETICAL, REVERSE_ALPHABETICAL, CREATED
 }
 
 export const enum Mode {
@@ -75,6 +75,8 @@ function sortEnvelopes(appState: AppState) {
         return 0
       }
     })
+  } else if (appState.envelopeSort === EnvelopeSort.CREATED) {
+    return envelopeArray.sort((a, b) => a.created.valueOf() > b.created.valueOf() ? -1 : 1)
   } else if (appState.envelopeSort === EnvelopeSort.ALPHABETICAL) {
     return envelopeArray.sort((a, b) => a.name.localeCompare(b.name))
   } else if (appState.envelopeSort === EnvelopeSort.REVERSE_ALPHABETICAL) {

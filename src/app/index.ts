@@ -8,7 +8,7 @@ export function createApp() {
     },
     topPadding: 0,
     mode: model.Mode.MANUAL_MODE,
-    envelopeSort: model.EnvelopeSort.ALPHABETICAL,
+    envelopeSort: model.EnvelopeSort.CREATED,
     envelopes: { },
     transactions: { }
   }

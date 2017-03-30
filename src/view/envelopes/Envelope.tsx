@@ -10,8 +10,8 @@ interface IProps {
 
 let tapNum = 0
 
-export const Envelope = ReactiveComponent(({ envelope }: IProps) =>
-  <MUI.Paper
+export const Envelope = ReactiveComponent(({ envelope }: IProps) => {
+  return <MUI.Paper
     key={ envelope.id }
     className={ getEnvelopeClassName(envelope) }
     zDepth={ envelope.isNaming || envelope.isTransacting ? 1 : 0 }
@@ -66,7 +66,7 @@ export const Envelope = ReactiveComponent(({ envelope }: IProps) =>
       <view.EnterTransaction key='transaction' envelope={ envelope }/>
     </div>
   </MUI.Paper>
-)
+})
 
 function iconMenuTap(e: __MaterialUI.TouchTapEvent) {
   tapNum++
