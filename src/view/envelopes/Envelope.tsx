@@ -101,8 +101,7 @@ function getEnvelopeClassName(envelope: model.Envelope) {
     transform: `translateY(${envelope.yPosition}px) !important`,
     left: 0,
     right: 0,
-    marginBottom: '96px',
-    $nest: envelope.isInactive ? {
+    $nest: {
       '&::after': {
         content: `''`,
         position: 'absolute',
@@ -112,18 +111,7 @@ function getEnvelopeClassName(envelope: model.Envelope) {
         bottom: '-5px',
         background: 'white',
         transition: styles.transition,
-        opacity: 0
-      } } : {
-      '&::after': {
-        content: `''`,
-        position: 'absolute',
-        left: '0',
-        right: '0',
-        height: '10px',
-        bottom: '-5px',
-        transition: styles.transition,
-        background: 'white',
-        opacity: 1
+        opacity: envelope.isInactive ? 0 : 1
       }
     },
   })

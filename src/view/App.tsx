@@ -19,11 +19,13 @@ const hideFab = utils.style({
 export const App = ReactiveComponent(() =>
   <MuiThemeProvider muiTheme={ app.theme }>
     <div onTouchTap={ utils.blurAll }>
-      <MUI.AppBar
-        title='Envelopes'
-        className={ getAppBarClassName() }
-        onLeftIconButtonTouchTap={ app.menu.toggle }
-      />
+      <div onTouchTap={ app.closeAllEnvelopes }>
+        <MUI.AppBar
+          title='Envelopes'
+          className={ getAppBarClassName() }
+          onLeftIconButtonTouchTap={ app.menu.toggle }
+        />
+      </div>
       <view.Menu/>
       <view.Animated
         willEnter={ { opacity: 0, transform: 'translateY(50px)' } }

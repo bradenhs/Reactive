@@ -28,3 +28,14 @@ export function init() {
     }, false)
   }
 }
+
+window.addEventListener('resize', () => {
+  if (document.activeElement != undefined &&
+      (document.activeElement.tagName.toLowerCase() === 'input' ||
+       document.activeElement.tagName.toLowerCase() === 'textarea')) {
+    if (document.activeElement.getBoundingClientRect().bottom >
+        window.innerHeight) {
+      document.activeElement.scrollIntoView()
+    }
+  }
+})

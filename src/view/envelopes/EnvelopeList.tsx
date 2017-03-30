@@ -3,16 +3,18 @@ import { app, utils, view } from '~/index'
 
 export const EnvelopeList = ReactiveComponent(() =>
   <div className={ getContainerClassName() } onTouchTap={ app.closeAllEnvelopes }>
-    <div className={ getClassName() } onTouchTap={ utils.stopPropagation }>
-      <view.Animated
-        willEnter={ { opacity: important(0) as any } }
-        didEnter={ { opacity: important(1) as any } }
-        didLeave={ { opacity: important(0) as any } }
-      >
-        { Object.keys(app.envelopes).map(id =>
-          <view.Envelope key={ id } envelope={ app.envelopes[id] } />
-        )}
-      </view.Animated>
+    <div className={ getClassName() }>
+      <div onTouchTap={ utils.stopPropagation }>
+        <view.Animated
+          willEnter={ { opacity: important(0) as any } }
+          didEnter={ { opacity: important(1) as any } }
+          didLeave={ { opacity: important(0) as any } }
+        >
+          { Object.keys(app.envelopes).map(id =>
+            <view.Envelope key={ id } envelope={ app.envelopes[id] } />
+          )}
+        </view.Animated>
+      </div>
     </div>
   </div>
 )
@@ -35,6 +37,6 @@ function getClassName() {
     position: 'absolute',
     left: '0',
     right: '0',
-    marginBottom: '96px',
+    height: (app.sortedEnvelopes.length * 72 + 200) + 'px'
   })
 }
