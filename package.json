@@ -42,10 +42,12 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "csx": "^8.2.1",
     "fnx": "^0.0.24",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
+    "react-animated-number": "^0.4.2",
     "react-dom": "^15.4.2",
     "react-tap-event-plugin": "^2.0.1",
     "typestyle": "^1.2.1",

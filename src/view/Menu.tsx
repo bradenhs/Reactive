@@ -13,7 +13,7 @@ export const Menu = ReactiveComponent(() =>
     onRequestChange={ app.menu.toggle }
   >
     <header
-      className={ style({ background: app.theme.palette.primary1Color, textAlign: 'center' }) }
+      className={ getMenuHeaderClassName() }
     >
       <img className={ img } src='assets/icon.png'/>
     </header>
@@ -50,3 +50,11 @@ export const Menu = ReactiveComponent(() =>
     />
   </MUI.Drawer>
 )
+
+function getMenuHeaderClassName() {
+  return style({
+    background: app.theme.palette.primary1Color,
+    textAlign: 'center',
+    paddingTop: app.topPadding + 'px'
+  })
+}

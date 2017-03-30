@@ -1,3 +1,5 @@
 export * from './EnvelopeList'
 export * from './EmptyList'
 export * from './Envelope'
+export * from './EditName'
+export * from './EnterTransaction'

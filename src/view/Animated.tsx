@@ -6,21 +6,22 @@ interface IProps {
   willEnter: types.NestedCSSProperties
   didEnter: types.NestedCSSProperties
   didLeave: types.NestedCSSProperties
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  delay?: boolean
 }
 
 export const Animated = ReactiveComponent((props: IProps) =>
   <ReactCSSTransitionGroup
     transitionName={ getTransitionNames(props) }
-    transitionEnterTimeout={ 700 }
-    transitionLeaveTimeout={ 200 }
+    transitionEnterTimeout={ props.delay ? 700 : 500 }
+    transitionLeaveTimeout={ 500 }
   >
     { props.children }
   </ReactCSSTransitionGroup>
 )
 
 function getTransitionNames(props: IProps) {
-  const delay = { transitionDelay: '200ms' }
+  const delay = { transitionDelay: props.delay ? '200ms' : '0ms' }
   const transition = { transition: styles.transition }
   const enter = style({
     ...delay, ...transition, ...props.willEnter

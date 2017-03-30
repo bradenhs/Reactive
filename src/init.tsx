@@ -1,6 +1,6 @@
 import * as ReactDOM from 'react-dom'
 import * as injectTapEventPlugin from 'react-tap-event-plugin'
-import { styles, view } from '~/index'
+import { app, styles, view } from '~/index'
 
 export function init() {
   styles.addBaseStyles()
@@ -13,8 +13,11 @@ export function init() {
   if (ENVIRONMENT === 'mobile-app') {
     document.addEventListener('deviceready', () => {
       if (device.platform === 'iOS') {
+        app.setTopPadding(20)
         Keyboard.shrinkView(true)
         Keyboard.hideFormAccessoryBar(true)
+      } else {
+        app.setTopPadding(25)
       }
 
       navigator.splashscreen.hide()

@@ -18,6 +18,8 @@ export class AppState {
 
   mode: Mode = number
 
+  topPadding = number
+
   activeEnvelope? = computed((appState: AppState) => appState.envelopes[appState.activeEnvelopeId])
 
   @optional
@@ -47,6 +49,14 @@ export class AppState {
 
     appState.envelopes[envelope.id] = envelope
   })
+
+  closeAllEnvelopes? = action((appState: AppState) => () => {
+    appState.activeEnvelopeId = undefined
+  })
+
+  setTopPadding? = action((appState: AppState) => (topPadding: number) => {
+    appState.topPadding = topPadding
+  })
 }
 
 function sortEnvelopes(appState: AppState) {
@@ -56,7 +66,7 @@ function sortEnvelopes(appState: AppState) {
     return envelopeArray.sort((a, b) => {
       if (a.mostRecentTransaction && b.mostRecentTransaction) {
         return a.mostRecentTransaction.created.valueOf() >
-                b.mostRecentTransaction.created.valueOf() ? 1 : -1
+               b.mostRecentTransaction.created.valueOf() ? 1 : -1
       } else if (a.mostRecentTransaction) {
         return 1
       } else if (b.mostRecentTransaction) {

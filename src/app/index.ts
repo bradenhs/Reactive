@@ -6,6 +6,7 @@ export function createApp() {
     menu: {
       isOpen: false
     },
+    topPadding: 0,
     mode: model.Mode.MANUAL_MODE,
     envelopeSort: model.EnvelopeSort.ALPHABETICAL,
     envelopes: { },

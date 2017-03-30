@@ -1,22 +1,32 @@
 import { action, arrayOf, complex, computed, number, optional, readonly, string } from 'fnx'
 import * as uuid from 'uuid'
-import { model } from '~/index'
+import { model, styles } from '~/index'
 
 export const enum EnvelopeView {
   NAMING, TRANSACTION
 }
 
 export class Envelope {
-  @readonly id = string
-  @readonly created = complex.date
+  // Properties
+  @readonly
+  id = string
+
+  @readonly
+  created = complex.date
+
+  @optional
+  nameInputValue? = string
+
+  @optional
+  transactionAmountInputValue? = string
 
   view: EnvelopeView = number
 
-  @optional newTransactionAmount? = string
-
   name = string
-  @optional proposedName? = string
 
+  transactionIds = arrayOf(string)
+
+  // Computed Values
   isTransacting? = computed((envelope: Envelope, root: model.AppState) => {
     return root.activeEnvelopeId === envelope.id && envelope.view === EnvelopeView.TRANSACTION
   })
@@ -35,7 +45,9 @@ export class Envelope {
     if (root.activeEnvelopeId != undefined &&
         root.sortedEnvelopes.indexOf(root.activeEnvelope) <
         root.sortedEnvelopes.indexOf(envelope)) {
-      yPosition += 92
+      yPosition += root.activeEnvelope.isNaming ?
+                   styles.namingViewHeight :
+                   styles.transactingViewHeight
     }
 
     return yPosition
@@ -68,42 +80,53 @@ export class Envelope {
       .map(id => root.transactions[id])
   })
 
-  transactionIds = arrayOf(string)
+  // Actions
 
-  setProposedName? = action((envelope: Envelope) => (proposedName: string) => {
-    envelope.proposedName = proposedName
+  setNameInputValue? = action((envelope: Envelope) => (value: string) => {
+    envelope.nameInputValue = value
   })
 
-  setNewTransactionAmount? = action((envelope: Envelope) => (amount: string) => {
-    envelope.newTransactionAmount = amount
+  setTransactionAmountInputValue? = action((envelope: Envelope) => (value: string) => {
+    envelope.transactionAmountInputValue = envelope.transactionAmountInputValue || ''
+
+    if (/\d*\.?\d*/.test(value)) {
+      const v = value.split('.').join('').split('')
+      if (v.length > 2) {
+        v.splice(v.length - 2, 0, '.')
+      }
+      envelope.transactionAmountInputValue = v.join('')
+    }
   })
 
-  commitProposedNamed? = action((envelope: Envelope, root: model.AppState) => () => {
+  setName? = action((envelope: Envelope, root: model.AppState) => (name: string) => {
     root.activeEnvelopeId = undefined
-    envelope.name = envelope.proposedName
-    envelope.view = EnvelopeView.TRANSACTION
+    envelope.name = name
   })
 
   remove? = action((envelope: Envelope, root: model.AppState) => () => {
-    root.activeEnvelopeId = undefined
+    if (root.activeEnvelopeId === envelope.id) {
+      root.activeEnvelopeId = undefined
+    }
     delete root.envelopes[envelope.id]
   })
 
-  startRename? = action((envelope: Envelope, root: model.AppState) => () => {
+  enterRenameView? = action((envelope: Envelope, root: model.AppState) => () => {
     root.activeEnvelopeId = envelope.id
+    envelope.nameInputValue = envelope.name
     envelope.view = EnvelopeView.NAMING
   })
 
-  startTransacting? = action((envelope: Envelope, root: model.AppState) => () => {
+  enterNewTransactionView? = action((envelope: Envelope, root: model.AppState) => () => {
     envelope.view = EnvelopeView.TRANSACTION
+    envelope.transactionAmountInputValue = ''
     root.activeEnvelopeId = envelope.id
   })
 
-  addAmount? = action((envelope: Envelope, root: model.AppState) => () => {
+  deposit? = action((envelope: Envelope, root: model.AppState) => (amount: number) => {
     const transaction: model.Transaction = {
       id: uuid.v4(),
       created: new Date(),
-      amount: parseFloat(envelope.newTransactionAmount),
+      amount,
       destinationId: envelope.id,
       sourceId: 'MANUAL'
     }
@@ -112,29 +135,16 @@ export class Envelope {
     root.activeEnvelopeId = undefined
   })
 
-  transferAmount? = action((envelope: Envelope, root: model.AppState) => () => {
+  withdraw? = action((envelope: Envelope, root: model.AppState) => (amount: number) => {
     const transaction: model.Transaction = {
       id: uuid.v4(),
       created: new Date(),
-      amount: -parseFloat(envelope.newTransactionAmount),
+      amount: -amount,
       destinationId: envelope.id,
       sourceId: 'MANUAL'
     }
-    root.transactions[transaction.id] = transaction
     envelope.transactionIds.push(transaction.id)
-    root.activeEnvelopeId = undefined
-  })
-
-  minusAmount? = action((envelope: Envelope, root: model.AppState) => () => {
-    const transaction: model.Transaction = {
-      id: uuid.v4(),
-      created: new Date(),
-      amount: -parseFloat(envelope.newTransactionAmount),
-      destinationId: envelope.id,
-      sourceId: 'MANUAL'
-    }
     root.transactions[transaction.id] = transaction
-    envelope.transactionIds.push(transaction.id)
     root.activeEnvelopeId = undefined
   })
 }

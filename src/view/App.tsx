@@ -21,6 +21,7 @@ export const App = ReactiveComponent(() =>
     <div>
       <MUI.AppBar
         title='Envelopes'
+        className={ getAppBarClassName() }
         onLeftIconButtonTouchTap={ app.menu.toggle }
       />
       <view.Menu/>
@@ -28,6 +29,7 @@ export const App = ReactiveComponent(() =>
         willEnter={ { opacity: 0, transform: 'translateY(50px)' } }
         didEnter={ { opacity: 1, transform: 'translateY(0px)' } }
         didLeave={ { opacity: 0, transform: 'translateY(-50px)' } }
+        delay
       >
         { app.sortedEnvelopes.length > 0 ?
           <view.EnvelopeList key='list'/> :
@@ -43,6 +45,12 @@ export const App = ReactiveComponent(() =>
     </div>
   </MuiThemeProvider>
 )
+
+function getAppBarClassName() {
+  return style({
+    paddingTop: app.topPadding + 'px'
+  })
+}
 
 function getFABClassName() {
   if (app.hideFab) {
