@@ -22,6 +22,9 @@ export class Envelope {
 
   view: EnvelopeView = number
 
+  @optional
+  noteInputValue? = string
+
   name = string
 
   transactionIds = arrayOf(string)
@@ -86,6 +89,10 @@ export class Envelope {
     envelope.nameInputValue = value
   })
 
+  setNoteInputValue? = action((envelope: Envelope) => (value: string) => {
+    envelope.noteInputValue = value
+  })
+
   setTransactionAmountInputValue? = action((envelope: Envelope) => (value: string) => {
     envelope.transactionAmountInputValue = envelope.transactionAmountInputValue || ''
 
@@ -119,29 +126,36 @@ export class Envelope {
   enterNewTransactionView? = action((envelope: Envelope, root: model.AppState) => () => {
     envelope.view = EnvelopeView.TRANSACTION
     envelope.transactionAmountInputValue = ''
+    envelope.noteInputValue = ''
     root.activeEnvelopeId = envelope.id
   })
 
-  deposit? = action((envelope: Envelope, root: model.AppState) => (amount: number) => {
+  deposit? = action((envelope: Envelope, root: model.AppState) =>
+                    (amount: number, note?: string) => {
+
     const transaction: model.Transaction = {
       id: uuid.v4(),
       created: new Date(),
       amount,
       destinationId: envelope.id,
-      sourceId: 'MANUAL'
+      sourceId: 'MANUAL',
+      note
     }
     envelope.transactionIds.push(transaction.id)
     root.transactions[transaction.id] = transaction
     root.activeEnvelopeId = undefined
   })
 
-  withdraw? = action((envelope: Envelope, root: model.AppState) => (amount: number) => {
+  withdraw? = action((envelope: Envelope, root: model.AppState) =>
+                     (amount: number, note?: string) => {
+
     const transaction: model.Transaction = {
       id: uuid.v4(),
       created: new Date(),
       amount: -amount,
       destinationId: envelope.id,
-      sourceId: 'MANUAL'
+      sourceId: 'MANUAL',
+      note
     }
     envelope.transactionIds.push(transaction.id)
     root.transactions[transaction.id] = transaction

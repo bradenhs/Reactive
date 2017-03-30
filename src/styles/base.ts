@@ -4,7 +4,7 @@ export function addBaseStyles() {
   cssRaw(`
     body {
     margin: 0;
-    background: #eee;
+    background: #fff;
     overflow: hidden;
   }
 

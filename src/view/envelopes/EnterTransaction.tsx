@@ -6,37 +6,53 @@ interface IProps {
   envelope: model.Envelope
 }
 
-export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) =>
-  <MUI.Paper className={ getClassName(envelope) } zDepth={ envelope.isTransacting ? 1 : 0 }>
-    <div className={ style({ height: '100%', overflow: 'hidden', position: 'relative' })}>
+export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
+  let numberField: __MaterialUI.TextField
+  let noteField: __MaterialUI.TextField
+  return <MUI.Paper className={ getClassName(envelope) } zDepth={ envelope.isTransacting ? 1 : 0 }>
+    <div className={ getInputsContainerClassName(envelope) }>
       <span className={ getPlaceholderClassName() }>
         { getPlaceholderText(envelope) }
         <span style={ { color: 'white' } }>{ envelope.transactionAmountInputValue }</span>
       </span>
-      <MUI.TextField
-        className={ getTextFieldClassName() }
-        value={ envelope.transactionAmountInputValue || '' }
-        fullWidth
-        id='amount'
-        type='number'
-        pattern='\d*'
-        onKeyPress={ onKeyPress }
-        onChange={ (e: any) => {
-          e.preventDefault()
-          envelope.setTransactionAmountInputValue(e.target.value)
-        } }
-      />
-      <MUI.TextField
-        className={ getNoteClassName() }
-        fullWidth
-        hintStyle={ {
-          whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%'
-        } }
-        hintText='Note (optional)'
-      />
+      <div onTouchTap={ e => {
+        e.stopPropagation()
+        numberField && numberField.focus()
+      } }>
+        <MUI.TextField
+          className={ getTextFieldClassName() }
+          value={ envelope.transactionAmountInputValue || '' }
+          fullWidth
+          id='amount'
+          type='tel'
+          ref={ c => numberField = c}
+          hintText='Amount'
+          onKeyPress={ onKeyPress }
+          onChange={ (e: any) => {
+            e.preventDefault()
+            envelope.setTransactionAmountInputValue(e.target.value)
+          } }
+        />
+      </div>
+      <div onTouchTap={ e => {
+        e.stopPropagation()
+        noteField && noteField.focus()
+      } }>
+        <MUI.TextField
+          className={ getNoteClassName() }
+          fullWidth
+          ref={ c => noteField = c}
+          hintStyle={ {
+            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%'
+          } }
+          value={ envelope.noteInputValue || '' }
+          onChange={ (e: any) => envelope.setNoteInputValue(e.target.value) }
+          hintText='Note (optional)'
+        />
+      </div>
     </div>
     <MUI.FloatingActionButton
-      onTouchTap={ () => envelope.withdraw(getValue(envelope)) }
+      onTouchTap={ () => withdraw(envelope) }
       zDepth={ 1 }
       backgroundColor={ app.theme.palette.canvasColor }
       iconStyle={ { fill: app.theme.palette.accent3Color } }
@@ -47,7 +63,7 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) =>
     </MUI.FloatingActionButton>
     <MUI.FloatingActionButton
       zDepth={ 1 }
-      onTouchTap={ () => envelope.deposit(getValue(envelope)) }
+      onTouchTap={ () => deposit(envelope) }
       backgroundColor={ app.theme.palette.canvasColor }
       iconStyle={ { fill: app.theme.palette.accent3Color } }
       className={ getAddButtonClassName(envelope) }
@@ -56,14 +72,34 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) =>
       <icons.AddIcon/>
     </MUI.FloatingActionButton>
     <MUI.FloatingActionButton
-      onTouchTap={ () => envelope.withdraw(getValue(envelope)) }
+      onTouchTap={ () => transfer(envelope) }
       className={ getMinusButtonClassName(envelope) }
       mini
     >
       <icons.MinusIcon/>
     </MUI.FloatingActionButton>
   </MUI.Paper>
-)
+})
+
+function getInputsContainerClassName(envelope: model.Envelope) {
+  return style({
+    opacity: envelope.isTransacting ? 1 : 0,
+    transition: styles.transition,
+    position: 'relative'
+  })
+}
+
+function withdraw(envelope: model.Envelope) {
+  envelope.withdraw(getValue(envelope))
+}
+
+function deposit(envelope: model.Envelope) {
+  envelope.deposit(getValue(envelope))
+}
+
+function transfer(envelope: model.Envelope) {
+  envelope.withdraw(getValue(envelope))
+}
 
 function getValue(envelope: model.Envelope) {
   let v = envelope.transactionAmountInputValue || '0'
@@ -151,10 +187,13 @@ function getMinusButtonClassName(envelope: model.Envelope) {
 
 function getClassName(envelope: model.Envelope) {
   return style({
-    height: (envelope.isTransacting ? styles.transactingViewHeight : 0) + 'px',
     paddingLeft: '16px',
     paddingRight: '16px',
     position: 'absolute',
+    height: styles.transactingViewHeight + 'px',
+    pointerEvents: envelope.isTransacting ? 'auto' : 'none',
+    opacity: envelope.isTransacting ? 1 : 0,
+    transform: `translateY(${envelope.isTransacting ? 0 : -styles.transactingViewHeight}px)`,
     left: 0, right: 0,
   })
 }

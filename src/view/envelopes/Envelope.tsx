@@ -17,12 +17,10 @@ export const Envelope = ReactiveComponent(({ envelope }: IProps) =>
     zDepth={ envelope.isNaming || envelope.isTransacting ? 1 : 0 }
   >
     <div
-      className={ style({
-        padding: '16px', overflowX: 'hidden', width: '100%', boxSizing: 'border-box'
-      }) }
+      className={ getContentClassName() }
       onTouchTap={ () =>
         envelope.isNaming || envelope.isTransacting ?
-        utils.closeKeyboardThen(() => app.closeAllEnvelopes()) :
+        app.closeAllEnvelopes() :
         envelope.name === '' ? envelope.enterRenameView() : envelope.enterNewTransactionView()
       }
     >
@@ -63,14 +61,24 @@ export const Envelope = ReactiveComponent(({ envelope }: IProps) =>
         </MUI.IconMenu>
       </div>
     </div>
-    <view.EditName key='name' envelope={ envelope }/>
-    <view.EnterTransaction key='transaction' envelope={ envelope }/>
+    <div style={ { paddingTop: '72px' } }>
+      <view.EditName key='name' envelope={ envelope }/>
+      <view.EnterTransaction key='transaction' envelope={ envelope }/>
+    </div>
   </MUI.Paper>
 )
 
 function iconMenuTap(e: __MaterialUI.TouchTapEvent) {
   tapNum++
   utils.stopPropagation(e)
+}
+
+function getContentClassName() {
+  return style({
+    padding: '16px', overflowX: 'hidden', width: '100%', boxSizing: 'border-box',
+    zIndex: 2, position: 'absolute',
+    background: 'white'
+  })
 }
 
 function getMoreButtonClassName(envelope: model.Envelope) {

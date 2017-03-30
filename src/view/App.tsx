@@ -1,6 +1,6 @@
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { classes, style } from 'typestyle'
-import { app, icons, styles, view } from '~/index'
+import { app, icons, styles, utils, view } from '~/index'
 
 const fab = style({
   position: 'absolute',
@@ -18,7 +18,7 @@ const hideFab = style({
 
 export const App = ReactiveComponent(() =>
   <MuiThemeProvider muiTheme={ app.theme }>
-    <div>
+    <div onTouchTap={ utils.blurAll }>
       <MUI.AppBar
         title='Envelopes'
         className={ getAppBarClassName() }

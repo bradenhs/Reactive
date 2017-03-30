@@ -1,18 +1,23 @@
 import { style } from 'typestyle'
-import { icons, model, styles, utils } from '~/index'
+import { icons, model, styles } from '~/index'
 
 interface IProps {
   envelope: model.Envelope
 }
 
-export const EditName = ReactiveComponent(({ envelope }: IProps) =>
-  <MUI.Paper className={ getClassName(envelope) } zDepth={ envelope.isNaming ? 1 : 0 }>
-    <div className={ style({ height: '100%', overflow: 'hidden' })}>
+export const EditName = ReactiveComponent(({ envelope }: IProps) => {
+  let textField: __MaterialUI.TextField
+  return <MUI.Paper className={ getClassName(envelope) } zDepth={ envelope.isNaming ? 1 : 0 }>
+    <div onTouchTap={ e => {
+      e.stopPropagation()
+      textField && textField.focus()
+    } }>
       <MUI.TextField
         className={ getTextFieldClassName() }
         value={ envelope.nameInputValue || '' }
         fullWidth
         hintText='Envelope Name'
+        ref={ c => textField = c }
         onChange={ (e: any) => envelope.setNameInputValue(e.target.value) }
       />
     </div>
@@ -24,19 +29,22 @@ export const EditName = ReactiveComponent(({ envelope }: IProps) =>
       <icons.DoneIcon/>
     </MUI.FloatingActionButton>
   </MUI.Paper>
-)
+})
 
 function setEnvelopeName(envelope: model.Envelope) {
   const normalizedInputValue = (envelope.nameInputValue || '').trim()
-  utils.closeKeyboardThen(() => envelope.setName(normalizedInputValue))
+  envelope.setName(normalizedInputValue)
 }
 
 function getClassName(envelope: model.Envelope) {
   return style({
-    height: (envelope.isNaming ? styles.namingViewHeight : 0) + 'px',
+    height: styles.namingViewHeight + 'px',
     paddingLeft: '16px',
     paddingRight: '16px',
     position: 'absolute',
+    pointerEvents: envelope.isNaming ? 'auto' : 'none',
+    opacity: envelope.isNaming ? 1 : 0,
+    transform: `translateY(${envelope.isNaming ? 0 : -styles.namingViewHeight}px)`,
     left: 0, right: 0,
   })
 }
