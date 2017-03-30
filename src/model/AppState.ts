@@ -1,4 +1,4 @@
-import { action, computed, mapOf, number, object, optional, string } from 'fnx'
+import { action, boolean, computed, mapOf, number, object, optional, parseInto, string } from 'fnx'
 import * as colors from 'material-ui/styles/colors'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import * as uuid from 'uuid'
@@ -17,6 +17,8 @@ export class AppState {
   menu = object(model.Menu)
 
   mode: Mode = number
+
+  loading = boolean
 
   topPadding = number
 
@@ -56,6 +58,14 @@ export class AppState {
 
   setTopPadding? = action((appState: AppState) => (topPadding: number) => {
     appState.topPadding = topPadding
+  })
+
+  fromObject? = action((appState: AppState) => (object: object) => {
+    parseInto(object, appState)
+  })
+
+  finishLoading? = action((appState: AppState) => () => {
+    appState.loading = false
   })
 }
 

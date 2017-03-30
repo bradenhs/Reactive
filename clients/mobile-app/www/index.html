@@ -8,12 +8,25 @@
   <meta http-equiv="Content-Security-Policy"
   <meta http-equiv="Content-Security-Policy" content="default-src * blob: 'self' data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'" />
   <title>Reactive</title>
-</head>
-<body>
+  <style>
+    body {
+      margin: 0;
+      background: #eee;
+      overflow: hidden;
+    }
+    #dummyAppBar {
+      height: 64px;
+      box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+      background-color: rgb(33, 150, 243);
+    }
+  </style>
   <script>
     var ENVIRONMENT = 'mobile-app'
   </script>
-  <section id='app'>Hello</section>
+</head>
+<body>
+  <div id='dummyAppBar'></div>
+  <div id='app'></div>
   <script src='build/dependencies.bundle.js'></script>
   <script src='build/src.bundle.js'></script>
   <script type="text/javascript" src="cordova.js"></script>

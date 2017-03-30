@@ -10,7 +10,8 @@ export function createApp() {
     mode: model.Mode.MANUAL_MODE,
     envelopeSort: model.EnvelopeSort.CREATED,
     envelopes: { },
-    transactions: { }
+    transactions: { },
+    loading: true
   }
 
   return createObservable(model.AppState, initialAppState)

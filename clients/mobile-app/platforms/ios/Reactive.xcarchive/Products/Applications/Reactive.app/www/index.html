@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
+  <meta http-equiv="Content-Security-Policy"
+  <meta http-equiv="Content-Security-Policy" content="default-src * blob: 'self' data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'" />
+  <title>Reactive</title>
+  <style>
+    body {
+      margin: 0;
+      background: #eee;
+    }
+    #dummyAppBar {
+      height: 64px;
+      box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+      background-color: rgb(33, 150, 243);
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var ENVIRONMENT = 'mobile-app'
+  </script>
+  <section id='app'>
+    <div id='dummyAppBar'></div>
+  </section>
+  <script src='build/dependencies.bundle.js'></script>
+  <script src='build/src.bundle.js'></script>
+  <script type="text/javascript" src="cordova.js"></script>
+</body>
+</html>

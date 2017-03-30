@@ -1,4 +1,4 @@
-import { app, icons, utils } from '~/index'
+import { app, icons, styles, utils } from '~/index'
 
 export const EmptyList = ReactiveComponent(() =>
   <div className={ getClassName() }>
@@ -15,6 +15,9 @@ function getClassName() {
     left: '0',
     fontFamily: 'Roboto',
     fontSize: '22px',
+    transition: styles.transition,
+    transform: `translateY(${app.loading ? 40 : 0}px)`,
+    opacity: app.loading || app.sortedEnvelopes.length > 0 ? 0 : 1,
     color: app.theme.palette.accent3Color + ' !important',
     $nest: {
       '& svg': {

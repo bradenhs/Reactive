@@ -96,9 +96,9 @@ function getEnvelopeClassName(envelope: model.Envelope) {
   return utils.style({
     zIndex: envelope.isInactive ? 1 : 2,
     opacity: envelope.isInactive ? .5 : 1,
-    transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) !important',
+    transition: important(styles.transition),
     position: 'absolute',
-    transform: `translateY(${envelope.yPosition}px) !important`,
+    transform: important(`translateY(${envelope.yPosition}px)`),
     left: 0,
     right: 0,
     $nest: {

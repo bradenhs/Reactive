@@ -43,7 +43,8 @@
   },
   "dependencies": {
     "csx": "^8.2.1",
-    "fnx": "^0.0.24",
+    "fnx": "^0.0.25",
+    "localforage": "^1.5.0",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
