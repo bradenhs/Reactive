@@ -1,6 +1,6 @@
 import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import { style, types } from 'typestyle'
-import { styles } from '~/index'
+import { types } from 'typestyle'
+import { styles, utils } from '~/index'
 
 interface IProps {
   willEnter: types.NestedCSSProperties
@@ -23,16 +23,16 @@ export const Animated = ReactiveComponent((props: IProps) =>
 function getTransitionNames(props: IProps) {
   const delay = { transitionDelay: props.delay ? '200ms' : '0ms' }
   const transition = { transition: styles.transition }
-  const enter = style({
+  const enter = utils.style({
     ...delay, ...transition, ...props.willEnter
   })
-  const enterActive = style({
+  const enterActive = utils.style({
     ...delay, ...transition, ...props.willEnter, ...props.didEnter
   })
-  const leave = style({
+  const leave = utils.style({
     ...transition, ...props.didLeave, ...props.didEnter
   })
-  const leaveActive = style({
+  const leaveActive = utils.style({
     ...transition, ...props.didLeave
   })
   return {

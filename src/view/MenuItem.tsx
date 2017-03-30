@@ -1,6 +1,5 @@
 import * as colors from 'material-ui/styles/colors'
-import { style } from 'typestyle'
-import { app } from '~/index'
+import { app, utils } from '~/index'
 
 interface IProps {
   icon: JSX.Element
@@ -9,7 +8,7 @@ interface IProps {
 }
 
 const className = function() {
-  return style({
+  return utils.style({
     $nest: {
       '& > svg': {
         color: app.theme.palette.accent3Color + ' !important'

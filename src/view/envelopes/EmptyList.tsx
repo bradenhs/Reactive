@@ -1,5 +1,4 @@
-import { style } from 'typestyle'
-import { app, icons } from '~/index'
+import { app, icons, utils } from '~/index'
 
 export const EmptyList = ReactiveComponent(() =>
   <div className={ getClassName() }>
@@ -9,7 +8,7 @@ export const EmptyList = ReactiveComponent(() =>
 )
 
 function getClassName() {
-  return style({
+  return utils.style({
     position: 'absolute',
     textAlign: 'center',
     right: '0',

@@ -1,8 +1,8 @@
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { classes, style } from 'typestyle'
+import { classes } from 'typestyle'
 import { app, icons, styles, utils, view } from '~/index'
 
-const fab = style({
+const fab = utils.style({
   position: 'absolute',
   right: '20px',
   bottom: '20px',
@@ -11,7 +11,7 @@ const fab = style({
   transition: styles.transition
 })
 
-const hideFab = style({
+const hideFab = utils.style({
   pointerEvents: 'none',
   transform: 'scale(0)'
 })
@@ -47,7 +47,7 @@ export const App = ReactiveComponent(() =>
 )
 
 function getAppBarClassName() {
-  return style({
+  return utils.style({
     paddingTop: app.topPadding + 'px'
   })
 }

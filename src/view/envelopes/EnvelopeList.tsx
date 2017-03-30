@@ -1,5 +1,4 @@
 import { important } from 'csx'
-import { style } from 'typestyle'
 import { app, utils, view } from '~/index'
 
 export const EnvelopeList = ReactiveComponent(() =>
@@ -19,7 +18,7 @@ export const EnvelopeList = ReactiveComponent(() =>
 )
 
 function getContainerClassName() {
-  return style({
+  return utils.style({
     position: 'absolute',
     left: '0',
     right: '0',
@@ -32,7 +31,7 @@ function getContainerClassName() {
 }
 
 function getClassName() {
-  return style({
+  return utils.style({
     position: 'absolute',
     left: '0',
     right: '0',

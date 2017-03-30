@@ -1,7 +1,6 @@
 import { important } from 'csx'
 import * as colors from 'material-ui/styles/colors'
 import * as AnimatedNumber from 'react-animated-number'
-import { style } from 'typestyle'
 import { app, icons, model, styles, utils, view } from '~/index'
 
 interface IProps {
@@ -74,7 +73,7 @@ function iconMenuTap(e: __MaterialUI.TouchTapEvent) {
 }
 
 function getContentClassName() {
-  return style({
+  return utils.style({
     padding: '16px', overflowX: 'hidden', width: '100%', boxSizing: 'border-box',
     zIndex: 2, position: 'absolute',
     background: 'white'
@@ -82,7 +81,7 @@ function getContentClassName() {
 }
 
 function getMoreButtonClassName(envelope: model.Envelope) {
-  return style({
+  return utils.style({
     position: important('absolute'),
     transition: styles.transition,
     transform: `translateX(${envelope.isTransacting || envelope.isNaming ? 0 : 48}px)`,
@@ -94,7 +93,7 @@ function getMoreButtonClassName(envelope: model.Envelope) {
 }
 
 function getEnvelopeClassName(envelope: model.Envelope) {
-  return style({
+  return utils.style({
     zIndex: envelope.isInactive ? 1 : 2,
     opacity: envelope.isInactive ? .5 : 1,
     transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) !important',
@@ -102,6 +101,7 @@ function getEnvelopeClassName(envelope: model.Envelope) {
     transform: `translateY(${envelope.yPosition}px) !important`,
     left: 0,
     right: 0,
+    marginBottom: '96px',
     $nest: envelope.isInactive ? {
       '&::after': {
         content: `''`,
@@ -133,7 +133,7 @@ function getEnvelopeNameClassName(envelope: model.Envelope) {
   const showUnnamedStyle =
     (!envelope.isNaming && !envelope.name) ||
     (envelope.isNaming && !envelope.nameInputValue)
-  return style({
+  return utils.style({
     position: 'absolute',
     top: '0',
     left: '76px',
@@ -151,7 +151,7 @@ function getEnvelopeNameClassName(envelope: model.Envelope) {
 }
 
 function getAmountClassName(envelope: model.Envelope) {
-  return style({
+  return utils.style({
     position: 'absolute',
     top: '0',
     right: '16px',
@@ -164,6 +164,6 @@ function getAmountClassName(envelope: model.Envelope) {
     color: envelope.amount < 0 ? colors.red800 : app.theme.palette.textColor,
     whiteSpace: 'nowrap',
     overflow: 'hidden',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
   })
 }

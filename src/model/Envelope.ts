@@ -43,17 +43,21 @@ export class Envelope {
   })
 
   yPosition? = computed((envelope: Envelope, root: model.AppState) => {
-    let yPosition = root.sortedEnvelopes.indexOf(envelope) * 72
+    let yPosition = envelope.index * 72
 
     if (root.activeEnvelopeId != undefined &&
         root.sortedEnvelopes.indexOf(root.activeEnvelope) <
-        root.sortedEnvelopes.indexOf(envelope)) {
+        envelope.index) {
       yPosition += root.activeEnvelope.isNaming ?
                    styles.namingViewHeight :
                    styles.transactingViewHeight
     }
 
     return yPosition
+  })
+
+  index? = computed((envelope: Envelope, root: model.AppState) => {
+    return root.sortedEnvelopes.indexOf(envelope)
   })
 
   lastPaydayAmount? = computed((envelope: Envelope) => {

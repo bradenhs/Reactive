@@ -1,7 +1,6 @@
-import { style } from 'typestyle'
-import { app, icons, view } from '~/index'
+import { app, icons, utils, view } from '~/index'
 
-const img = style({
+const img = utils.style({
   width: '64px',
   margin: '50px'
 })
@@ -52,7 +51,7 @@ export const Menu = ReactiveComponent(() =>
 )
 
 function getMenuHeaderClassName() {
-  return style({
+  return utils.style({
     background: app.theme.palette.primary1Color,
     textAlign: 'center',
     paddingTop: app.topPadding + 'px'

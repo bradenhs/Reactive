@@ -1,5 +1,4 @@
-import { style } from 'typestyle'
-import { icons, model, styles } from '~/index'
+import { icons, model, styles, utils } from '~/index'
 
 interface IProps {
   envelope: model.Envelope
@@ -25,7 +24,6 @@ export const EditName = ReactiveComponent(({ envelope }: IProps) => {
     <MUI.FloatingActionButton
       onTouchTap={ () => setEnvelopeName(envelope) }
       className={ getDoneButtonClassName(envelope) }
-      mini
     >
       <icons.DoneIcon/>
     </MUI.FloatingActionButton>
@@ -38,7 +36,7 @@ function setEnvelopeName(envelope: model.Envelope) {
 }
 
 function getClassName(envelope: model.Envelope) {
-  return style({
+  return utils.style({
     height: styles.namingViewHeight + 'px',
     paddingLeft: '16px',
     paddingRight: '16px',
@@ -51,18 +49,18 @@ function getClassName(envelope: model.Envelope) {
 }
 
 function getTextFieldClassName() {
-  return style({
+  return utils.style({
     fontSize: '20px !important',
   })
 }
 
 function getDoneButtonClassName(envelope: model.Envelope) {
-  return style({
+  return utils.style({
     transform: `scale(${envelope.isNaming ? 1 : 0})`,
     opacity: envelope.isNaming ? 1 : 0,
-    transformOrigin: '20px 25px',
+    transformOrigin: '28px 33px',
     position: 'absolute',
     right: '20px',
-    bottom: '-15px'
+    bottom: '-23px'
   })
 }

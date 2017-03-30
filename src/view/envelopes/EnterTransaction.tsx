@@ -1,6 +1,6 @@
 import { important } from 'csx'
-import { classes, style } from 'typestyle'
-import { app, icons, model, styles } from '~/index'
+import { classes } from 'typestyle'
+import { app, icons, model, styles, utils } from '~/index'
 
 interface IProps {
   envelope: model.Envelope
@@ -58,7 +58,6 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
       backgroundColor={ app.theme.palette.canvasColor }
       iconStyle={ { fill: app.theme.palette.accent3Color } }
       className={ getTransferButtonClassName(envelope) }
-      mini
     >
       <icons.TransferIcon/>
     </MUI.FloatingActionButton>
@@ -68,14 +67,12 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
       backgroundColor={ app.theme.palette.canvasColor }
       iconStyle={ { fill: app.theme.palette.accent3Color } }
       className={ getAddButtonClassName(envelope) }
-      mini
     >
       <icons.AddIcon/>
     </MUI.FloatingActionButton>
     <MUI.FloatingActionButton
       onTouchTap={ () => transfer(envelope) }
       className={ getMinusButtonClassName(envelope) }
-      mini
     >
       <icons.MinusIcon/>
     </MUI.FloatingActionButton>
@@ -83,7 +80,7 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
 })
 
 function getInputsContainerClassName(envelope: model.Envelope) {
-  return style({
+  return utils.style({
     opacity: envelope.isTransacting ? 1 : 0,
     transition: styles.transition,
     position: 'relative'
@@ -119,7 +116,7 @@ function onKeyPress(e: React.KeyboardEvent<{}>) {
 }
 
 function getPlaceholderClassName() {
-  return style({
+  return utils.style({
     position: 'absolute',
     pointerEvents: 'none',
     fontSize: '20px',
@@ -149,7 +146,7 @@ function getPlaceholderText(envelope: model.Envelope) {
 }
 
 function getNoteClassName() {
-  return style({
+  return utils.style({
     fontSize: '14px !important',
     marginTop: '-10px',
     $nest: {
@@ -161,33 +158,33 @@ function getNoteClassName() {
 }
 
 function getBaseButtonClass(envelope: model.Envelope) {
-  return style({
+  return utils.style({
     transform: `scale(${envelope.isTransacting ? 1 : 0})`,
     opacity: envelope.isTransacting ? 1 : 0,
-    transformOrigin: '20px 25px',
+    transformOrigin: '28px 33px',
     position: 'absolute',
-    bottom: '-15px'
+    bottom: '-23px'
   })
 }
 
 function getAddButtonClassName(envelope: model.Envelope) {
-  return classes(getBaseButtonClass(envelope), style({
-    right: '80px',
+  return classes(getBaseButtonClass(envelope), utils.style({
+    right: '100px',
   }))
 }
 function getTransferButtonClassName(envelope: model.Envelope) {
-  return classes(getBaseButtonClass(envelope), style({
-    right: '140px',
+  return classes(getBaseButtonClass(envelope), utils.style({
+    right: '180px',
   }))
 }
 function getMinusButtonClassName(envelope: model.Envelope) {
-  return classes(getBaseButtonClass(envelope), style({
+  return classes(getBaseButtonClass(envelope), utils.style({
     right: '20px',
   }))
 }
 
 function getClassName(envelope: model.Envelope) {
-  return style({
+  return utils.style({
     paddingLeft: '16px',
     paddingRight: '16px',
     position: 'absolute',
@@ -200,7 +197,7 @@ function getClassName(envelope: model.Envelope) {
 }
 
 function getTextFieldClassName() {
-  return style({
+  return utils.style({
     fontSize: '20px !important',
     $nest: {
       '& > *': {

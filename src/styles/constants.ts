@@ -1,2 +1,2 @@
-export const namingViewHeight = 76
-export const transactingViewHeight = 115
+export const namingViewHeight = 86
+export const transactingViewHeight = 125
