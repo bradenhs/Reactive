@@ -13,6 +13,21 @@ injectTapEventPlugin()
 
 const promise = localforage.getItem('app')
 
+document.addEventListener('deviceready', () => {
+  if (device.platform === 'iOS') {
+    (cordova.plugins as any).Keyboard.disableScroll(true)
+    setIOSPaddingWhenReady()
+  }
+}, false)
+
+function setIOSPaddingWhenReady() {
+  if (app == undefined) {
+    setTimeout(setIOSPaddingWhenReady, 50)
+  } else {
+    app.setTopPadding(20)
+  }
+}
+
 export async function init() {
   styles.addBaseStyles()
   styles.addFonts()
@@ -22,7 +37,16 @@ export async function init() {
   const result = await promise
 
   if (result != undefined) {
-    app.fromObject(result)
+    const topPadding = app.topPadding
+    try {
+      app.fromObject(result)
+    } catch (e) {
+      alert(
+        'Invalid version of app state on disk. ' +
+        'Clear app storage to fix this (simply reinstalling works).'
+      )
+    }
+    app.setTopPadding(topPadding)
   }
   app.finishLoading()
 
@@ -33,27 +57,21 @@ export async function init() {
     }, 500)
   }, 500)
 
-  if (ENVIRONMENT === 'mobile-app') {
-    document.addEventListener('deviceready', () => {
-      if (device.platform === 'iOS') {
-        app.setTopPadding(20)
-      }
-    }, false)
-  }
-
   reaction(() => {
     localforage.setItem('app', app.toString())
   })
 }
 
-window.addEventListener('resize', () => {
+window.addEventListener('native.keyboardshow', () => {
   if (document.activeElement != undefined &&
       (document.activeElement.tagName.toLowerCase() === 'input' ||
        document.activeElement.tagName.toLowerCase() === 'textarea')) {
-    let parent = document.activeElement.parentElement
-    while (!parent.classList.contains('input-scoll-container')) {
-      parent = parent.parentElement
+    let node = document.activeElement.parentElement
+    while (!node.classList.contains('input-scoll-container')) {
+      node = node.parentElement
     }
-    parent.scrollIntoView({ behavior: 'smooth' })
+    setTimeout(() => {
+      node.children[0].scrollIntoView({ behavior: 'smooth' })
+    }, 50)
   }
 })

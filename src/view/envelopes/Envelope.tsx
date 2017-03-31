@@ -16,6 +16,7 @@ export const Envelope = ReactiveComponent(({ envelope }: IProps) => {
     className={ getEnvelopeClassName(envelope) }
     zDepth={ envelope.isNaming || envelope.isTransacting ? 1 : 0 }
   >
+    <div className={ getScrollSpacerClassName() }/>
     <div
       className={ getContentClassName() }
       onTouchTap={ () =>
@@ -40,7 +41,7 @@ export const Envelope = ReactiveComponent(({ envelope }: IProps) => {
         <AnimatedNumber
           value={ envelope.amount }
           formatValue={ v => utils.formatCurrency(v) }
-          duration={ 450 }
+          duration={ 750 }
         />
       </span>
       <div onTouchTap={ iconMenuTap }>
@@ -78,6 +79,16 @@ function getContentClassName() {
     padding: '16px', overflowX: 'hidden', width: '100%', boxSizing: 'border-box',
     zIndex: 2, position: 'absolute',
     background: 'white'
+  })
+}
+
+function getScrollSpacerClassName() {
+  return utils.style({
+    position: 'absolute',
+    top: '-72px',
+    left: '0px',
+    right: '0px',
+    pointerEvents: 'none'
   })
 }
 

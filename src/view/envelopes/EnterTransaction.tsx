@@ -20,7 +20,7 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
         numberField && numberField.focus()
       } }>
         <MUI.TextField
-          className={ getTextFieldClassName() }
+          className={ getTransactionFieldClassName() }
           value={ envelope.transactionAmountInputValue || '' }
           fullWidth
           id='amount'
@@ -148,7 +148,6 @@ function getPlaceholderText(envelope: model.Envelope) {
 
 function getNoteClassName() {
   return utils.style({
-    pointerEvents: 'none',
     fontSize: '14px !important',
     marginTop: '-10px',
     $nest: {
@@ -198,9 +197,8 @@ function getClassName(envelope: model.Envelope) {
   })
 }
 
-function getTextFieldClassName() {
+function getTransactionFieldClassName() {
   return utils.style({
-    pointerEvents: 'none',
     fontSize: '20px !important',
     $nest: {
       '& > *': {

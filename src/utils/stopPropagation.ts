@@ -1,6 +1,6 @@
 import { utils } from '~/index'
 
 export function stopPropagation(e: __MaterialUI.TouchTapEvent) {
-  utils.blurAll()
+  utils.closeKeyboard()
   e.stopPropagation()
 }

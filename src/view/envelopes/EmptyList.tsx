@@ -26,7 +26,7 @@ function getClassName() {
         height: '120px !important',
         marginLeft: 'auto',
         marginRight: 'auto',
-        marginTop: '50px',
+        marginTop: '80px',
         marginBottom: '20px',
         color: app.theme.palette.accent3Color + ' !important'
       }

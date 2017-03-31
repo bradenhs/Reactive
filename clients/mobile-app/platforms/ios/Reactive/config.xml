@@ -18,12 +18,12 @@
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
     </feature>
-    <feature name="Keyboard">
-        <param name="ios-package" onload="true" value="CDVKeyboard" />
-    </feature>
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="Keyboard">
+        <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
     <name>Reactive</name>
     <description>
@@ -57,6 +57,4 @@
     <preference name="PaginationMode" value="unpaginated" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarStyle" value="lightcontent" />
-    <preference name="KeyboardShrinksView" value="true" />
-    <preference name="HideKeyboardFormAccessoryBar" value="true" />
 </widget>

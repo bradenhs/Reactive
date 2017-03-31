@@ -18,7 +18,7 @@ const hideFab = utils.style({
 
 export const App = ReactiveComponent(() =>
   <MuiThemeProvider muiTheme={ app.theme }>
-    <div onTouchTap={ utils.blurAll }>
+    <div onTouchTap={ utils.closeKeyboard }>
       <div onTouchTap={ app.closeAllEnvelopes }>
         <MUI.AppBar
           title='Envelopes'
