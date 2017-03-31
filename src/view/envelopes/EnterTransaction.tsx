@@ -24,7 +24,8 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
           value={ envelope.transactionAmountInputValue || '' }
           fullWidth
           id='amount'
-          type='tel'
+          type='text'
+          pattern='[0-9]*'
           ref={ c => numberField = c}
           hintText='Amount'
           hintStyle={ { fontWeight: 400 } }
@@ -147,6 +148,7 @@ function getPlaceholderText(envelope: model.Envelope) {
 
 function getNoteClassName() {
   return utils.style({
+    pointerEvents: 'none',
     fontSize: '14px !important',
     marginTop: '-10px',
     $nest: {
@@ -198,6 +200,7 @@ function getClassName(envelope: model.Envelope) {
 
 function getTextFieldClassName() {
   return utils.style({
+    pointerEvents: 'none',
     fontSize: '20px !important',
     $nest: {
       '& > *': {

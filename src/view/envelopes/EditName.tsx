@@ -50,6 +50,7 @@ function getClassName(envelope: model.Envelope) {
 
 function getTextFieldClassName() {
   return utils.style({
+    pointerEvents: 'none',
     fontSize: '20px !important',
   })
 }

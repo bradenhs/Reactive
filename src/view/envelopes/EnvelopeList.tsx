@@ -33,10 +33,15 @@ function getContainerClassName() {
 }
 
 function getClassName() {
+  let height = app.sortedEnvelopes.length * 72 + 200
+  const top = 64 + app.topPadding
+  if (height < (window.innerHeight - top + 1)) {
+    height = (window.innerHeight - top + 1)
+  }
   return utils.style({
     position: 'absolute',
     left: '0',
     right: '0',
-    height: (app.sortedEnvelopes.length * 72 + 200) + 'px'
+    height: height + 'px'
   })
 }

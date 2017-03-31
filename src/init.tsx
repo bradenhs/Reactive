@@ -2,17 +2,20 @@ import { reaction } from 'fnx'
 import * as localforage from 'localforage'
 import * as ReactDOM from 'react-dom'
 import * as injectTapEventPlugin from 'react-tap-event-plugin'
+import * as smoothscroll from 'smoothscroll-polyfill'
 import { app, styles, view } from '~/index'
 
 (window as any).localforage = localforage
+
+smoothscroll.polyfill()
+
+injectTapEventPlugin()
 
 const promise = localforage.getItem('app')
 
 export async function init() {
   styles.addBaseStyles()
   styles.addFonts()
-
-  injectTapEventPlugin()
 
   ReactDOM.render(<view.App/>, document.querySelector('#app'))
 
@@ -21,30 +24,20 @@ export async function init() {
   if (result != undefined) {
     app.fromObject(result)
   }
-
   app.finishLoading()
+
+  setTimeout(() => {
+    document.querySelector('#loader').className = 'remove'
+    setTimeout(() => {
+      document.querySelector('#loader').remove()
+    }, 500)
+  }, 500)
 
   if (ENVIRONMENT === 'mobile-app') {
     document.addEventListener('deviceready', () => {
       if (device.platform === 'iOS') {
         app.setTopPadding(20)
-        Keyboard.shrinkView(true)
-        Keyboard.hideFormAccessoryBar(true)
-      } else {
-        if (window.innerHeight <= 320 && window.innerWidth <= 240) {
-          app.setTopPadding(20)
-        } else if (window.innerHeight <= 480 && window.innerWidth <= 320) {
-          app.setTopPadding(25)
-        } else {
-          app.setTopPadding(38)
-        }
       }
-
-      navigator.splashscreen.hide()
-
-      // Initialize status bar
-      StatusBar.styleBlackOpaque()
-      StatusBar.show()
     }, false)
   }
 
@@ -57,9 +50,10 @@ window.addEventListener('resize', () => {
   if (document.activeElement != undefined &&
       (document.activeElement.tagName.toLowerCase() === 'input' ||
        document.activeElement.tagName.toLowerCase() === 'textarea')) {
-    if (document.activeElement.getBoundingClientRect().bottom >
-        window.innerHeight) {
-      document.activeElement.scrollIntoView()
+    let parent = document.activeElement.parentElement
+    while (!parent.classList.contains('input-scoll-container')) {
+      parent = parent.parentElement
     }
+    parent.scrollIntoView({ behavior: 'smooth' })
   }
 })

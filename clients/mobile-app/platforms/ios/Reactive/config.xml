@@ -43,7 +43,7 @@
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <preference name="AllowInlineMediaPlayback" value="false" />
-    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="BackupWebStorage" value="local" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="EnableViewportScale" value="false" />
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
@@ -57,6 +57,6 @@
     <preference name="PaginationMode" value="unpaginated" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarStyle" value="lightcontent" />
-    <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="KeyboardShrinksView" value="true" />
+    <preference name="HideKeyboardFormAccessoryBar" value="true" />
 </widget>

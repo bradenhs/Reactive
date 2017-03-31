@@ -1,6 +1,7 @@
 import { important } from 'csx'
 import * as colors from 'material-ui/styles/colors'
 import * as AnimatedNumber from 'react-animated-number'
+import { classes } from 'typestyle'
 import { app, icons, model, styles, utils, view } from '~/index'
 
 interface IProps {
@@ -93,7 +94,7 @@ function getMoreButtonClassName(envelope: model.Envelope) {
 }
 
 function getEnvelopeClassName(envelope: model.Envelope) {
-  return utils.style({
+  return classes('input-scoll-container', utils.style({
     zIndex: envelope.isInactive ? 1 : 2,
     opacity: envelope.isInactive ? .5 : 1,
     transition: important(styles.transition),
@@ -114,7 +115,7 @@ function getEnvelopeClassName(envelope: model.Envelope) {
         opacity: envelope.isInactive ? 0 : 1
       }
     },
-  })
+  }))
 }
 
 function getEnvelopeNameClassName(envelope: model.Envelope) {
