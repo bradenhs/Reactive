@@ -38,17 +38,21 @@ export async function init() {
 
   if (result != undefined) {
     const topPadding = app.topPadding
-    try {
-      app.fromObject(result)
-    } catch (e) {
-      alert(
-        'Invalid version of app state on disk. ' +
-        'Clear app storage to fix this (simply reinstalling works).'
-      )
-    }
-    app.setTopPadding(topPadding)
+    setTimeout(() => {
+      try {
+        app.fromObject(result)
+      } catch (e) {
+        alert(
+          'Invalid version of app state on disk. ' +
+          'Clear app storage to fix this (simply reinstalling works).'
+        )
+      }
+      app.setTopPadding(topPadding)
+      app.finishLoading()
+    }, 1)
+  } else {
+    app.finishLoading()
   }
-  app.finishLoading()
 
   setTimeout(() => {
     document.querySelector('#loader').className = 'remove'

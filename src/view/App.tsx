@@ -39,7 +39,7 @@ export const App = ReactiveComponent(() =>
           <view.EmptyList key='empty-list'/> }
       </view.Animated>
       <MUI.FloatingActionButton
-        onTouchTap={ app.createEnvelope }
+        onTouchTap={ createEnvelope }
         className={ getFABClassName() }
         secondary
       >
@@ -48,6 +48,16 @@ export const App = ReactiveComponent(() =>
     </div>
   </MuiThemeProvider>
 )
+
+function createEnvelope() {
+  app.createEnvelope()
+  setTimeout(() => {
+    const input = document.querySelector('#id-' + app.sortedEnvelopes[0].id) as HTMLInputElement
+    if (input && input.focus) {
+      input.focus()
+    }
+  }, 300)
+}
 
 function getAppBarClassName() {
   return utils.style({

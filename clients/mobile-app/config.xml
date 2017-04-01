@@ -20,6 +20,7 @@
     <plugin name="cordova-plugin-statusbar" spec="~2.2.2" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="local" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="SuppressesLongPressGesture" value="true" />
     <preference name="Suppresses3DTouchGesture" value="true" />
     <platform name="android">

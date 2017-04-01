@@ -11,6 +11,8 @@ interface IProps {
 let tapNum = 0
 
 export const Envelope = ReactiveComponent(({ envelope }: IProps) => {
+  let nameInputRef: __MaterialUI.TextField
+  let transactionInputRef: __MaterialUI.TextField
   return <MUI.Paper
     key={ envelope.id }
     className={ getEnvelopeClassName(envelope) }
@@ -19,11 +21,7 @@ export const Envelope = ReactiveComponent(({ envelope }: IProps) => {
     <div className={ getScrollSpacerClassName() }/>
     <div
       className={ getContentClassName() }
-      onTouchTap={ () =>
-        envelope.isNaming || envelope.isTransacting ?
-        app.closeAllEnvelopes() :
-        envelope.name === '' ? envelope.enterRenameView() : envelope.enterNewTransactionView()
-      }
+      onTouchTap={ () => onEnvelopeTouchTap(envelope, nameInputRef, transactionInputRef) }
     >
       <MUI.Avatar
         backgroundColor={ app.theme.palette.accent2Color }
@@ -63,11 +61,39 @@ export const Envelope = ReactiveComponent(({ envelope }: IProps) => {
       </div>
     </div>
     <div style={ { paddingTop: '72px' } }>
-      <view.EditName key='name' envelope={ envelope }/>
-      <view.EnterTransaction key='transaction' envelope={ envelope }/>
+      <view.EditName
+        key='name'
+        envelope={ envelope }
+        nameInputRef={ c => nameInputRef = c}
+      />
+      <view.EnterTransaction
+        key='transaction'
+        envelope={ envelope }
+        transactionInputRef={ c => transactionInputRef = c }
+      />
     </div>
   </MUI.Paper>
 })
+
+function onEnvelopeTouchTap(
+  envelope: model.Envelope,
+  nameInputRef: __MaterialUI.TextField,
+  transactionInputRef: __MaterialUI.TextField
+) {
+  if (envelope.isNaming || envelope.isTransacting) {
+    app.closeAllEnvelopes()
+  } else if (envelope.name === '') {
+    envelope.enterRenameView()
+    setTimeout(() => {
+      nameInputRef.focus()
+    }, 300)
+  } else {
+    envelope.enterNewTransactionView()
+    setTimeout(() => {
+      transactionInputRef.focus()
+    }, 300)
+  }
+}
 
 function iconMenuTap(e: __MaterialUI.TouchTapEvent) {
   tapNum++
@@ -105,12 +131,15 @@ function getMoreButtonClassName(envelope: model.Envelope) {
 }
 
 function getEnvelopeClassName(envelope: model.Envelope) {
+  const gone = app.envelopes[envelope.id] == undefined
   return classes('input-scoll-container', utils.style({
-    zIndex: envelope.isInactive ? 1 : 2,
+    zIndex: gone ? 1 : (envelope.isInactive ? 2 : 3),
     opacity: envelope.isInactive ? .5 : 1,
     transition: important(styles.transition),
     position: 'absolute',
-    transform: important(`translateY(${envelope.yPosition}px)`),
+    transform: gone ?
+      `translateY(${envelope.yPosition - 72}px) !important` :
+      `translateY(${envelope.yPosition}px)`,
     left: 0,
     right: 0,
     $nest: {

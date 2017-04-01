@@ -4,9 +4,10 @@ import { app, icons, model, styles, utils } from '~/index'
 
 interface IProps {
   envelope: model.Envelope
+  transactionInputRef: (c: __MaterialUI.TextField) => void
 }
 
-export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
+export const EnterTransaction = ReactiveComponent(({ envelope, transactionInputRef }: IProps) => {
   let numberField: __MaterialUI.TextField
   let noteField: __MaterialUI.TextField
   return <MUI.Paper className={ getClassName(envelope) } zDepth={ envelope.isTransacting ? 1 : 0 }>
@@ -25,8 +26,11 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
           fullWidth
           id='amount'
           type='text'
-          pattern='[0-9]*'
-          ref={ c => numberField = c}
+          pattern={ getInputPattern() }
+          ref={ c => {
+            numberField = c
+            transactionInputRef(c)
+          } }
           hintText='Amount'
           hintStyle={ { fontWeight: 400 } }
           onKeyPress={ onKeyPress }
@@ -79,6 +83,14 @@ export const EnterTransaction = ReactiveComponent(({ envelope }: IProps) => {
     </MUI.FloatingActionButton>
   </MUI.Paper>
 })
+
+function getInputPattern() {
+  if (typeof device === 'object' && device.platform === 'iOS') {
+    return '[0-9]*'
+  } else {
+    return '\d*'
+  }
+}
 
 function getInputsContainerClassName(envelope: model.Envelope) {
   return utils.style({

@@ -2,9 +2,10 @@ import { icons, model, styles, utils } from '~/index'
 
 interface IProps {
   envelope: model.Envelope
+  nameInputRef: (c: __MaterialUI.TextField) => void
 }
 
-export const EditName = ReactiveComponent(({ envelope }: IProps) => {
+export const EditName = ReactiveComponent(({ envelope, nameInputRef }: IProps) => {
   let textField: __MaterialUI.TextField
   return <MUI.Paper className={ getClassName(envelope) } zDepth={ envelope.isNaming ? 1 : 0 }>
     <div onTouchTap={ e => {
@@ -15,9 +16,13 @@ export const EditName = ReactiveComponent(({ envelope }: IProps) => {
         className={ getTextFieldClassName() }
         value={ envelope.nameInputValue || '' }
         fullWidth
+        id={ 'id-' + envelope.id }
         hintText='Envelope Name'
         hintStyle={ { fontWeight: 400 } }
-        ref={ c => textField = c }
+        ref={ c => {
+          textField = c
+          nameInputRef(c)
+         } }
         onChange={ (e: any) => envelope.setNameInputValue(e.target.value) }
       />
     </div>

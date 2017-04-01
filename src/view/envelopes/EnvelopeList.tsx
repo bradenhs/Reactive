@@ -1,13 +1,19 @@
 import { important } from 'csx'
-import { app, utils, view } from '~/index'
+import { app, styles, utils, view } from '~/index'
 
 export const EnvelopeList = ReactiveComponent(() =>
   <div className={ getContainerClassName() } onTouchTap={ app.closeAllEnvelopes }>
     <div className={ getClassName() }>
       <div onTouchTap={ utils.stopPropagation }>
         <view.Animated
-          willEnter={ { opacity: important(0) as any } }
-          didEnter={ { opacity: important(1) as any } }
+          willEnter={ {
+            transform: `translateY(-${styles.namingViewHeight}px) !important`,
+            opacity: important(0) as any }
+          }
+          didEnter={ {
+            transform: `translateY(0px) !important`,
+            opacity: important(1) as any
+          } }
           didLeave={ { opacity: important(0) as any } }
         >
           { Object.keys(app.envelopes).map(id =>
