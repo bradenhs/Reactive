@@ -34,6 +34,7 @@
     <preference name="loglevel" value="DEBUG" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="local" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <preference name="SuppressesLongPressGesture" value="true" />
     <preference name="Suppresses3DTouchGesture" value="true" />
     <preference name="AndroidLaunchMode" value="singleTop" />

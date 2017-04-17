@@ -11,7 +11,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noEmitOnError": true,
-    "experimentalDecorators": true,
-    "lib": [ "es2015", "dom" ]
-  }
+    "experimentalDecorators": true
+  },
+  "exclude": [
+    "srcOld", "node_modules"
+  ]
 }

@@ -2,6 +2,10 @@ import { cssRaw } from 'typestyle'
 
 export function addBaseStyles() {
   cssRaw(`
+    body.transitioning * {
+      pointer-events: none !important;
+    }
+
     #app {
       position: absolute;
       left: 0;

@@ -1,8 +1,7 @@
-import { createObservable } from 'fnx'
 import { model } from '~/index'
 
 export function createApp() {
-  const initialAppState: model.AppState = {
+  return new model.AppState({
     menu: {
       isOpen: false
     },
@@ -12,7 +11,5 @@ export function createApp() {
     envelopes: { },
     transactions: { },
     loading: true
-  }
-
-  return createObservable(model.AppState, initialAppState)
+  })
 }

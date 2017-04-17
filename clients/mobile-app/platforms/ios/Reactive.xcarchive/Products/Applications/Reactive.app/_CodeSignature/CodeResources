@@ -86,7 +86,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
-		4rxL++LfHMz0cRMGrJRRqZdUBOg=
+		cHF4XzeQZEyZhcwKd0Hl8DVLc5I=
 		</data>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
 		<data>
@@ -94,7 +94,7 @@
 		</data>
 		<key>CDVLaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
 		<data>
-		AhQxoc4f4oao6w/w39eWqOmU7DM=
+		OdY2Ca7EN/lXFF9XX7YM3TBXnf8=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -158,7 +158,7 @@
 		</data>
 		<key>MainViewController.nib</key>
 		<data>
-		ftPgTlPHl3pAVU2NS7saJZbo1b4=
+		q4vF7EHRj55hn7a+s2NDFlfQkG0=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -294,7 +294,7 @@
 		</data>
 		<key>www/build/src.bundle.js</key>
 		<data>
-		VvixYg0rfO/6lgrLI94XJfPAVFI=
+		CNv7ruqRa12y0eu1CyjlE5TLurY=
 		</data>
 		<key>www/cordova-js-src/exec.js</key>
 		<data>
@@ -555,11 +555,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4rxL++LfHMz0cRMGrJRRqZdUBOg=
+			cHF4XzeQZEyZhcwKd0Hl8DVLc5I=
 			</data>
 			<key>hash2</key>
 			<data>
-			w1hyjhYjqv2Zu6g63/pK0mJ32hA8KkWL2PEeuYxKzRk=
+			2IiPeJF/0c5M14K5DIuh7Q3NjIB/wOaAd54lculIJx4=
 			</data>
 		</dict>
 		<key>CDVLaunchScreen.storyboardc/Info.plist</key>
@@ -577,11 +577,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AhQxoc4f4oao6w/w39eWqOmU7DM=
+			OdY2Ca7EN/lXFF9XX7YM3TBXnf8=
 			</data>
 			<key>hash2</key>
 			<data>
-			A3GzDFV6WAdQol8xns2xC8ghN5cqIZfC5594eKSl2Kg=
+			zSL7rq9fItlL72QIYZoEMR4RRBuScoHJV1knn/agc00=
 			</data>
 		</dict>
 		<key>LaunchImage-568h@2x.png</key>
@@ -742,11 +742,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ftPgTlPHl3pAVU2NS7saJZbo1b4=
+			q4vF7EHRj55hn7a+s2NDFlfQkG0=
 			</data>
 			<key>hash2</key>
 			<data>
-			8w9ID3+W26HQk+DPwMdbBm8OIr/avLnHaBIj5h7EUOw=
+			oOvF9eTlKKKKAiFokZQxcw8+PaeQPeLBf/Krt2EJFek=
 			</data>
 		</dict>
 		<key>archived-expanded-entitlements.xcent</key>
@@ -1105,11 +1105,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VvixYg0rfO/6lgrLI94XJfPAVFI=
+			CNv7ruqRa12y0eu1CyjlE5TLurY=
 			</data>
 			<key>hash2</key>
 			<data>
-			FDNGt5k3sSQHIHOgZ/azSHyDIdb0rD/fSX6s7vGgyiY=
+			xLRgDdx8otFiUhg2FAO+kmOlibdddPcJiBHIKXKZTto=
 			</data>
 		</dict>
 		<key>www/cordova-js-src/exec.js</key>
