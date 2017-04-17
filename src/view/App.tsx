@@ -1,6 +1,6 @@
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { classes } from 'typestyle'
-import { app, icons, styles, utils, view } from '~/index'
+import { app, icons, model, styles, utils, view } from '~/index'
 
 const fab = utils.style({
   position: 'absolute',
@@ -20,12 +20,7 @@ export const App = ReactiveComponent(() =>
   <MuiThemeProvider muiTheme={ app.theme }>
     <div onTouchTap={ utils.closeKeyboard }>
       <div onTouchTap={ app.closeAllEnvelopes }>
-        <MUI.AppBar
-          title='Envelopes'
-          className={ getAppBarClassName() }
-          onLeftIconButtonTouchTap={ app.menu.toggle }
-          iconElementRight={ <MUI.FlatButton label='Payday'/> }
-        />
+        { renderAppBar() }
       </div>
       <view.Menu/>
       <view.Animated
@@ -48,6 +43,27 @@ export const App = ReactiveComponent(() =>
     </div>
   </MuiThemeProvider>
 )
+
+function renderAppBar() {
+  if (app.mode === model.Mode.MANUAL_MODE) {
+    return <MUI.AppBar
+      title='Envelopes'
+      className={ getAppBarClassName() }
+      onLeftIconButtonTouchTap={ app.menu.toggle }
+      iconElementRight={ <MUI.FlatButton label='Payday'/> }
+      onRightIconButtonTouchTap={ () => {
+        app.setMode(model.Mode.PAYDAY_MODE)
+      } }
+    />
+  } else {
+    return <MUI.AppBar
+      title='$643'
+      className={ getAppBarClassName() }
+      iconElementLeft={ <MUI.IconButton><icons.CloseIcon/></MUI.IconButton> }
+      onLeftIconButtonTouchTap={ () => app.setMode(model.Mode.MANUAL_MODE) }
+    />
+  }
+}
 
 function createEnvelope() {
   app.createEnvelope()

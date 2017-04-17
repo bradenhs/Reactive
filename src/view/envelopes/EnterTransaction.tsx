@@ -25,8 +25,8 @@ export const EnterTransaction = ReactiveComponent(({ envelope, transactionInputR
           value={ envelope.transactionAmountInputValue || '' }
           fullWidth
           id='amount'
-          type='text'
-          pattern={ getInputPattern() }
+          type={ getInputType() }
+          pattern='[0-9]*'
           ref={ c => {
             numberField = c
             transactionInputRef(c)
@@ -84,11 +84,11 @@ export const EnterTransaction = ReactiveComponent(({ envelope, transactionInputR
   </MUI.Paper>
 })
 
-function getInputPattern() {
+function getInputType() {
   if (typeof device === 'object' && device.platform === 'iOS') {
-    return '[0-9]*'
+    return 'text'
   } else {
-    return '\d*'
+    return 'number'
   }
 }
 

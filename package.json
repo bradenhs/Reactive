@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "csx": "^8.2.1",
-    "fnx": "^0.0.26",
+    "fnx": "0.0.26",
     "localforage": "^1.5.0",
     "material-ui": "^0.17.1",
     "react": "^15.4.2",

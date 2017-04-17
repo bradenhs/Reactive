@@ -67,6 +67,10 @@ export class AppState {
   finishLoading? = action((appState: AppState) => () => {
     appState.loading = false
   })
+
+  setMode? = action((appState: AppState) => (mode: Mode) => {
+    appState.mode = mode
+  })
 }
 
 function sortEnvelopes(appState: AppState) {
