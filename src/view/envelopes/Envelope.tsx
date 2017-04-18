@@ -146,13 +146,14 @@ function getEnvelopeClassName(envelope: model.Envelope) {
       '&::after': {
         content: `''`,
         position: 'absolute',
-        left: '0',
+        left: envelope.index === 0 ? '0px' : '72px',
         right: '0',
-        height: '10px',
-        bottom: '-5px',
-        background: 'white',
+        height: '1px',
+        top: '0px',
+        opacity: !(envelope.isTransacting || envelope.isNaming) ? 1 : 0,
         transition: styles.transition,
-        opacity: envelope.isInactive ? 0 : 1
+        background: '#eee',
+        zIndex: 4
       }
     },
   }))

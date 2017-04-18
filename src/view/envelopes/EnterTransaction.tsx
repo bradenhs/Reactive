@@ -14,7 +14,10 @@ export const EnterTransaction = ReactiveComponent(({ envelope, transactionInputR
     <div className={ getInputsContainerClassName(envelope) }>
       <span className={ getPlaceholderClassName() }>
         { getPlaceholderText(envelope) }
-        <span style={ { color: 'white' } }>{ envelope.transactionAmountInputValue }</span>
+        <span style={ { color: 'white' } }>{
+          envelope.addRemaining ? app.unallocated.toFixed(2) :
+          envelope.transactionAmountInputValue
+        }</span>
       </span>
       <div onTouchTap={ e => {
         e.stopPropagation()
@@ -22,11 +25,18 @@ export const EnterTransaction = ReactiveComponent(({ envelope, transactionInputR
       } }>
         <MUI.TextField
           className={ getTransactionFieldClassName() }
-          value={ envelope.transactionAmountInputValue || '' }
+          value={
+            envelope.addRemaining ? app.unallocated.toFixed(2) :
+            envelope.transactionAmountInputValue || ''
+          }
+          disabled={ envelope.addRemaining }
+          underlineDisabledStyle={ { borderBottom: 'solid 1px #eee', opacity: .25 } }
           fullWidth
           id='amount'
           type={ getInputType() }
           pattern='[0-9]*'
+          errorText={ envelope.transactionErrorMessage }
+          errorStyle={ { position: 'absolute', right: '2px', bottom: '-12px' } }
           ref={ c => {
             numberField = c
             transactionInputRef(c)
@@ -40,7 +50,7 @@ export const EnterTransaction = ReactiveComponent(({ envelope, transactionInputR
           } }
         />
       </div>
-      <div onTouchTap={ e => {
+      { app.mode === model.Mode.MANUAL_MODE && <div onTouchTap={ e => {
         e.stopPropagation()
         noteField && noteField.focus()
       } }>
@@ -49,16 +59,41 @@ export const EnterTransaction = ReactiveComponent(({ envelope, transactionInputR
           fullWidth
           ref={ c => noteField = c}
           hintStyle={ {
-            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', width: '100%'
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            width: important('calc(100% - 60px)')
           } }
           value={ envelope.noteInputValue || '' }
           onChange={ (e: any) => envelope.setNoteInputValue(e.target.value) }
           hintText='Note (optional)'
         />
-      </div>
+      </div> }
+      { app.mode !== model.Mode.MANUAL_MODE && <div onTouchTap={
+        e => {
+          e.stopPropagation()
+          envelope.toggleAddRemaining()
+        }
+      }>
+        <MUI.Toggle
+          style={ {
+            marginTop: '14px',
+            marginLeft: '7px'
+          } }
+          labelStyle={ {
+            fontSize: '14px',
+            color: app.theme.palette.accent3Color,
+            fontWeight: 300,
+            marginLeft: '10px'
+          } }
+          toggled={ envelope.addRemaining || false }
+          label='Add remaining'
+          labelPosition='right'
+        />
+      </div> }
     </div>
     <MUI.FloatingActionButton
-      onTouchTap={ () => withdraw(envelope) }
+      onTouchTap={ () => transfer(envelope) }
       zDepth={ 1 }
       backgroundColor={ app.theme.palette.canvasColor }
       iconStyle={ { fill: app.theme.palette.accent3Color } }
@@ -69,14 +104,20 @@ export const EnterTransaction = ReactiveComponent(({ envelope, transactionInputR
     <MUI.FloatingActionButton
       zDepth={ 1 }
       onTouchTap={ () => deposit(envelope) }
-      backgroundColor={ app.theme.palette.canvasColor }
-      iconStyle={ { fill: app.theme.palette.accent3Color } }
+      backgroundColor={
+        app.mode === model.Mode.PAYDAY_MODE ?
+        app.theme.palette.primary1Color :
+        app.theme.palette.canvasColor
+      }
+      iconStyle={ app.mode === model.Mode.PAYDAY_MODE ?
+                  { } :
+                  { fill: app.theme.palette.accent3Color }}
       className={ getAddButtonClassName(envelope) }
     >
       <icons.AddIcon/>
     </MUI.FloatingActionButton>
     <MUI.FloatingActionButton
-      onTouchTap={ () => transfer(envelope) }
+      onTouchTap={ () => withdraw(envelope) }
       className={ getMinusButtonClassName(envelope) }
     >
       <icons.MinusIcon/>
@@ -85,10 +126,10 @@ export const EnterTransaction = ReactiveComponent(({ envelope, transactionInputR
 })
 
 function getInputType() {
-  if (typeof device === 'object' && device.platform === 'iOS') {
-    return 'text'
-  } else {
+  if (typeof device === 'object' && device.platform === 'Android') {
     return 'number'
+  } else {
+    return 'text'
   }
 }
 
@@ -101,18 +142,56 @@ function getInputsContainerClassName(envelope: model.Envelope) {
 }
 
 function withdraw(envelope: model.Envelope) {
-  envelope.withdraw(getValue(envelope))
+  const amount = getValue(envelope)
+  if (amount == undefined) {
+    envelope.setTransactionErrorMessage('Enter an amount')
+    return
+  }
+  envelope.withdraw(amount)
 }
 
 function deposit(envelope: model.Envelope) {
-  envelope.deposit(getValue(envelope))
+  if (envelope.addRemaining) {
+    envelope.deposit(app.unallocated)
+    app.setUnallocated(0)
+  } else {
+    const amount = getValue(envelope)
+    if (amount == undefined) {
+      envelope.setTransactionErrorMessage('Enter an amount')
+      return
+    }
+    if (app.mode === model.Mode.PAYDAY_MODE) {
+      if (amount > app.unallocated) {
+        const diff = utils.formatCurrency(amount - app.unallocated)
+        envelope.setTransactionErrorMessage(`${diff} short`)
+        return
+      } else {
+        app.setUnallocated(app.unallocated - amount)
+      }
+    }
+    envelope.deposit(amount)
+  }
+  if (Math.round(app.unallocated * 100) === 0) {
+    app.setMode(model.Mode.MANUAL_MODE)
+  }
+  // if (app.mode === model.Mode.PAYDAY_MODE) {
+  //   const index = app.sortedEnvelopes.indexOf(app.activeEnvelope)
+  //   const newEnvelopeId = app.sortedEnvelopes[index] && app.sortedEnvelopes[index].id
+  //   if (newEnvelopeId) {
+  //     app.activeEnvelopeId = newEnvelopeId
+  //   }
+  // }
 }
 
-function transfer(envelope: model.Envelope) {
-  envelope.withdraw(getValue(envelope))
+function transfer(_: model.Envelope) {
+  alert('This feature not yet implemented')
 }
 
 function getValue(envelope: model.Envelope) {
+  if (envelope.transactionAmountInputValue == undefined ||
+      envelope.transactionAmountInputValue.trim() === '') {
+    return undefined
+  }
   let v = envelope.transactionAmountInputValue || '0'
   if (v.length === 1) {
     v = '.0' + v
@@ -149,13 +228,15 @@ function getPlaceholderClassName() {
 }
 
 function getPlaceholderText(envelope: model.Envelope) {
-  if (envelope.transactionAmountInputValue == undefined) {
+  const value = envelope.addRemaining ? app.unallocated.toFixed(2) :
+              envelope.transactionAmountInputValue
+  if (value == undefined) {
     return '0.00'
   }
-  if (envelope.transactionAmountInputValue.length > 4) {
+  if (value.length > 4) {
     return ''
   }
-  return '0.00'.slice(0, 4 - envelope.transactionAmountInputValue.length)
+  return '0.00'.slice(0, 4 - value.length)
 }
 
 function getNoteClassName() {
@@ -182,17 +263,19 @@ function getBaseButtonClass(envelope: model.Envelope) {
 
 function getAddButtonClassName(envelope: model.Envelope) {
   return classes(getBaseButtonClass(envelope), utils.style({
-    right: '100px',
+    right: app.mode === model.Mode.PAYDAY_MODE ? '20px' : '100px',
   }))
 }
 function getTransferButtonClassName(envelope: model.Envelope) {
   return classes(getBaseButtonClass(envelope), utils.style({
     right: '180px',
+    display: important(app.mode === model.Mode.PAYDAY_MODE ? 'none' : 'block'),
   }))
 }
 function getMinusButtonClassName(envelope: model.Envelope) {
   return classes(getBaseButtonClass(envelope), utils.style({
     right: '20px',
+    display: important(app.mode === model.Mode.PAYDAY_MODE ? 'none' : 'block'),
   }))
 }
 

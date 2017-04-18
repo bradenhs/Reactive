@@ -7,6 +7,7 @@ export function createApp() {
       isOpen: false
     },
     topPadding: 0,
+    unallocated: 0,
     mode: model.Mode.MANUAL_MODE,
     envelopeSort: model.EnvelopeSort.CREATED,
     envelopes: { },

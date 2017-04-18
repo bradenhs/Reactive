@@ -1,10 +1,19 @@
 import { important } from 'csx'
-import { app, styles, utils, view } from '~/index'
+import { app, model, styles, utils, view } from '~/index'
 
 export const EnvelopeList = ReactiveComponent(() =>
   <div className={ getContainerClassName() } onTouchTap={ app.closeAllEnvelopes }>
     <div className={ getClassName() }>
       <div onTouchTap={ utils.stopPropagation }>
+        <div className={ getUnallocatedClassName() }>
+          { utils.formatCurrency(app.unallocated) } uncategorized
+          <MUI.FlatButton
+            style={ { position: 'absolute', top: '9px', right: '9px' } }
+            label='Categorize'
+            primary
+            onTouchTap={ () => app.setMode(model.Mode.PAYDAY_MODE)}
+          />
+        </div>
         <view.Animated
           willEnter={ {
             transform: `translateY(-${styles.namingViewHeight}px) !important`,
@@ -24,6 +33,24 @@ export const EnvelopeList = ReactiveComponent(() =>
     </div>
   </div>
 )
+
+function getUnallocatedClassName() {
+  return utils.style({
+    position: 'absolute',
+    height: '56px',
+    left: '0',
+    right: '0',
+    lineHeight: '56px',
+    background: app.theme.palette.canvasColor,
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+    opacity: .9,
+    transition: styles.transition,
+    transform: `translateY(${app.unallocatedVisible ? 0 : -56}px)`
+  })
+}
 
 function getContainerClassName() {
   return utils.style({

@@ -37,7 +37,6 @@ export async function init() {
   const result = await promise
 
   if (result != undefined) {
-    const topPadding = app.topPadding
     setTimeout(() => {
       try {
         app.fromObject(result)
@@ -47,7 +46,6 @@ export async function init() {
           'Clear app storage to fix this (simply reinstalling works).'
         )
       }
-      app.setTopPadding(topPadding)
       app.finishLoading()
     }, 1)
   } else {

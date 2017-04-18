@@ -24,28 +24,43 @@ export const Menu = ReactiveComponent(() =>
     <view.MenuItem
       icon={ <icons.HistoryIcon/> }
       text='History'
-      onTouchTap={ app.menu.close }
+      onTouchTap={ () => {
+        alert('Not yet implemented')
+        app.menu.close()
+      } }
     />
     <view.MenuItem
       icon={ <icons.AnalyzeIcon/> }
       text='Analyze'
-      onTouchTap={ app.menu.close }
+      onTouchTap={ () => {
+        alert('Not yet implented')
+        app.menu.close()
+      } }
     />
     <view.MenuItem
       icon={ <icons.CollaborateIcon/> }
       text='Collaborate'
-      onTouchTap={ app.menu.close }
+      onTouchTap={ () => {
+        alert('Not yet implented')
+        app.menu.close()
+      } }
     />
     <MUI.Divider/>
     <view.MenuItem
       icon={ <icons.FeedbackIcon/> }
       text='Feedback'
-      onTouchTap={ app.menu.close }
+      onTouchTap={ () => {
+        alert('Not yet implemented')
+        app.menu.close()
+      } }
     />
     <view.MenuItem
       icon={ <icons.CodeIcon/> }
       text='Source Code'
-      onTouchTap={ app.menu.close }
+      onTouchTap={ () => {
+        alert('Not yet implemented')
+        app.menu.close()
+      } }
     />
   </MUI.Drawer>
 )

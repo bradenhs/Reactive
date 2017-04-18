@@ -10,7 +10,7 @@ export const enum EnvelopeSort {
 }
 
 export const enum Mode {
-  PAYDAY_MODE, TRANSFER_MODE, MANUAL_MODE
+  PAYDAY_MODE, TRANSFER_MODE, MANUAL_MODE, PAYCHECK_ENTER_MODE
 }
 
 export class AppState {
@@ -22,10 +22,21 @@ export class AppState {
 
   topPadding = number
 
+  @optional
+  paycheckInputValue? = string
+
+  unallocated = number
+
   activeEnvelope? = computed((appState: AppState) => appState.envelopes[appState.activeEnvelopeId])
 
   @optional
   activeEnvelopeId? = string
+
+  unallocatedVisible? = computed((appState: AppState) => {
+    return appState.mode === Mode.MANUAL_MODE &&
+           appState.activeEnvelope == undefined &&
+           appState.unallocated > 0
+  })
 
   hideFab? = computed((appState: AppState) => appState.activeEnvelopeId != undefined)
 
@@ -56,6 +67,10 @@ export class AppState {
     appState.activeEnvelopeId = undefined
   })
 
+  setUnallocated? = action((appState: AppState) => (amount: number) => {
+    appState.unallocated = amount
+  })
+
   setTopPadding? = action((appState: AppState) => (topPadding: number) => {
     appState.topPadding = topPadding
   })
@@ -70,6 +85,25 @@ export class AppState {
 
   setMode? = action((appState: AppState) => (mode: Mode) => {
     appState.mode = mode
+    if (mode === Mode.PAYCHECK_ENTER_MODE) {
+      appState.paycheckInputValue = ''
+    }
+  })
+
+  setActiveEnvelope? = action((appState: AppState) => (id: string) => {
+    appState.activeEnvelopeId = id
+  })
+
+  setPaycheckInputValue? = action((appState: AppState) => (value: string) => {
+    appState.paycheckInputValue = appState.paycheckInputValue || ''
+
+    if (/\d*\.?\d*/.test(value)) {
+      const v = value.split('.').join('').split('')
+      if (v.length > 2) {
+        v.splice(v.length - 2, 0, '.')
+      }
+      appState.paycheckInputValue = v.join('')
+    }
   })
 }
 
@@ -107,17 +141,21 @@ function sortEnvelopes(appState: AppState) {
 function getTheme(mode: Mode) {
   let primary1Color: string
   let primary2Color: string
+  let alternateTextColor: string
   const accent1Color = colors.deepOrange500
 
   if (mode === Mode.MANUAL_MODE) {
     primary1Color = colors.blue500
     primary2Color = colors.blue700
+    alternateTextColor = colors.fullWhite
   } else if (mode === Mode.PAYDAY_MODE) {
     primary1Color = colors.green600
     primary2Color = colors.green800
-  } else { // mode === Mode.TRANSFER_MODE
-    primary1Color = colors.purple500
-    primary2Color = colors.purple700
+    alternateTextColor = colors.fullWhite
+  } else if (mode === Mode.PAYCHECK_ENTER_MODE) { // mode === Mode.TRANSFER_MODE
+    primary1Color = colors.fullWhite
+    primary2Color = colors.darkWhite
+    alternateTextColor = colors.grey600
   }
 
   return getMuiTheme({
@@ -125,6 +163,7 @@ function getTheme(mode: Mode) {
       primary1Color,
       primary2Color,
       accent1Color,
+      alternateTextColor,
     },
     drawer: {
       width: 280,

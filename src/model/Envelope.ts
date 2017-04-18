@@ -1,4 +1,7 @@
-import { action, arrayOf, complex, computed, number, optional, readonly, string } from 'fnx'
+import {
+  action, arrayOf, boolean, complex,
+  computed, number, optional, readonly, string
+} from 'fnx'
 import * as uuid from 'uuid'
 import { model, styles } from '~/index'
 
@@ -18,7 +21,16 @@ export class Envelope {
   nameInputValue? = string
 
   @optional
+  nameErrorMessage? = string
+
+  @optional
   transactionAmountInputValue? = string
+
+  @optional
+  transactionErrorMessage? = string
+
+  @optional
+  addRemaining? = boolean
 
   view: EnvelopeView = number
 
@@ -39,6 +51,9 @@ export class Envelope {
   })
 
   isInactive? = computed((envelope: Envelope, root: model.AppState) => {
+    if (root.mode === model.Mode.PAYCHECK_ENTER_MODE) {
+      return true
+    }
     return root.activeEnvelopeId != undefined && root.activeEnvelopeId !== envelope.id
   })
 
@@ -51,6 +66,10 @@ export class Envelope {
       yPosition += root.activeEnvelope.isNaming ?
                    styles.namingViewHeight :
                    styles.transactingViewHeight
+    }
+
+    if (root.unallocatedVisible) {
+      yPosition += 56
     }
 
     return yPosition
@@ -89,6 +108,15 @@ export class Envelope {
 
   // Actions
 
+  toggleAddRemaining? = action((envelope: Envelope) => () => {
+    envelope.addRemaining = !envelope.addRemaining
+    envelope.transactionErrorMessage = ''
+  })
+
+  setTransactionErrorMessage? = action((envelope: Envelope) => (value: string) => {
+    envelope.transactionErrorMessage = value
+  })
+
   setNameInputValue? = action((envelope: Envelope) => (value: string) => {
     envelope.nameInputValue = value
   })
@@ -98,6 +126,7 @@ export class Envelope {
   })
 
   setTransactionAmountInputValue? = action((envelope: Envelope) => (value: string) => {
+    envelope.transactionErrorMessage = ''
     envelope.transactionAmountInputValue = envelope.transactionAmountInputValue || ''
 
     if (/\d*\.?\d*/.test(value)) {
@@ -124,14 +153,23 @@ export class Envelope {
   enterRenameView? = action((envelope: Envelope, root: model.AppState) => () => {
     root.activeEnvelopeId = envelope.id
     envelope.nameInputValue = envelope.name
+    envelope.nameErrorMessage = ''
     envelope.view = EnvelopeView.NAMING
+    if (root.mode === model.Mode.PAYCHECK_ENTER_MODE) {
+      root.mode = model.Mode.MANUAL_MODE
+    }
   })
 
   enterNewTransactionView? = action((envelope: Envelope, root: model.AppState) => () => {
     envelope.view = EnvelopeView.TRANSACTION
     envelope.transactionAmountInputValue = ''
+    envelope.transactionErrorMessage = ''
     envelope.noteInputValue = ''
+    envelope.addRemaining = false
     root.activeEnvelopeId = envelope.id
+    if (root.mode === model.Mode.PAYCHECK_ENTER_MODE) {
+      root.mode = model.Mode.MANUAL_MODE
+    }
   })
 
   deposit? = action((envelope: Envelope, root: model.AppState) =>
