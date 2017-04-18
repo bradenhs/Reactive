@@ -3,7 +3,7 @@ import * as localforage from 'localforage'
 import * as ReactDOM from 'react-dom'
 import * as injectTapEventPlugin from 'react-tap-event-plugin'
 import * as smoothscroll from 'smoothscroll-polyfill'
-import { app, styles, view } from '~/index'
+import { app, model, styles, view } from '~/index'
 
 (window as any).localforage = localforage
 
@@ -61,6 +61,14 @@ export async function init() {
 
   reaction(() => {
     localforage.setItem('app', app.toString())
+  })
+
+  reaction(() => {
+    if (app.mode === model.Mode.PAYCHECK_ENTER_MODE) {
+      window.StatusBar && StatusBar.styleDefault()
+    } else {
+      window.StatusBar && StatusBar.styleBlackOpaque()
+    }
   })
 }
 

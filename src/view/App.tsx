@@ -130,7 +130,7 @@ function getPlaceholderClassName() {
     fontSize: '20px',
     fontWeight: 300,
     right: '64px',
-    top: '21px',
+    top: (21 + app.topPadding) + 'px',
     fontFamily: 'Roboto',
     textAlign: 'right',
     color: app.theme.palette.accent3Color,
@@ -178,7 +178,7 @@ function getPaydayWageInputClassName() {
         textAlign: important('right')
       }
     },
-    top: '8px',
+    top: (8 + app.topPadding) + 'px',
     fontSize: important('20px'),
     width: important('calc(100% - 128px)'),
     zIndex: 9000

@@ -297,7 +297,13 @@ function getTransactionFieldClassName() {
     fontSize: '20px !important',
     $nest: {
       '& > *': {
+        marginTop: '-1px',
         textAlign: important('right')
+      },
+      '& > [disabled]': {
+        marginTop: important('0px'),
+        color: important('#555'),
+        fontWeight: important(400) as any
       }
     }
   })
